@@ -6,6 +6,7 @@ export default function Home() {
  const carouselRef = useRef(null);
  const ringRef = useRef(null);
  const [cur, setCur] = useState(0);
+ const year = 2026;
 
  useEffect(() => {
  const ring = ringRef.current;
@@ -103,7 +104,7 @@ export default function Home() {
  </details>
  </li>
  <li><a href="#noticias">Notícias</a></li>
- <li><a className="btn" href="https://wa.me/55SEUNUMERO" target="_blank" rel="noopener noreferrer">Solicitar orçamento</a></li>
+ <li><a className="btn" href="/orcamento">Solicitar orçamento</a></li>
  </ul>
  </nav>
  </div>
@@ -120,7 +121,7 @@ export default function Home() {
  <h1>Proteção <b>inteligente</b> para o seu <em>negócio</em></h1>
  <p className="lead">Soluções completas em vigilância, portaria e monitoramento para empresas, indústrias e condomínios.</p>
  <div className="cta">
- <a className="btn" href="https://wa.me/55SEUNUMERO" target="_blank" rel="noopener noreferrer">Solicitar orçamento</a>
+ <a className="btn" href="/orcamento">Solicitar orçamento</a>
  <a className="btn o" href="https://wa.me/55SEUNUMERO" target="_blank" rel="noopener noreferrer">Chamar no WhatsApp</a>
  </div>
  </div>
@@ -129,9 +130,9 @@ export default function Home() {
 
  <div className="stats">
  <div className="w">
- <div><strong>+[00] anos</strong><span>de atuação no mercado</span></div>
- <div><strong>+[000]</strong><span>postos de serviço atendidos</span></div>
- <div><strong>24 horas</strong><span>de atendimento e suporte à operação</span></div>
+ <div className="stat-card"><strong>+[00] anos</strong><span>de atuação no mercado</span></div>
+ <div className="stat-card"><strong>+[000]</strong><span>postos de serviço atendidos</span></div>
+ <div className="stat-card"><strong>24 horas</strong><span>de atendimento e suporte à operação</span></div>
  </div>
  </div>
 
@@ -273,12 +274,12 @@ export default function Home() {
  <a href="https://youtube.com/@soberana" target="_blank" rel="noopener noreferrer" aria-label="YouTube">yt</a>
  </div>
  </div>
- <div><h3>Acesso rápido</h3><ul><li><a href="#servicos">Serviços</a></li><li><a href="#segmentos">Para quem atuamos</a></li><li><a href="#noticias">Notícias</a></li><li><a href="https://wa.me/55SEUNUMERO" target="_blank" rel="noopener noreferrer">Solicitar orçamento</a></li></ul></div>
+ <div><h3>Acesso rápido</h3><ul><li><a href="#servicos">Serviços</a></li><li><a href="#segmentos">Para quem atuamos</a></li><li><a href="#noticias">Notícias</a></li><li><a href="/orcamento">Solicitar orçamento</a></li></ul></div>
  <div><h3>Institucional</h3><ul><li><a href="#">Prêmios e parceiros</a></li><li><a href="#">Ouvidoria</a></li><li><a href="#">Canal de conduta ética</a></li><li><a href="#">Proteção de dados (LGPD)</a></li><li><a href="#" target="_blank" rel="noopener noreferrer">Trabalhe conosco</a></li></ul></div>
  <div><h3>Ache-nos</h3><p>ADE Conj. 20, Lt. 07<br/>Águas Claras – DF<br/>CEP 71989-300<br/>Tel.: <a href="tel:+556133996013">(61) 3399-6013</a></p></div>
  </div>
  <div className="fb">
- <span>© <span id="y">{new Date().getFullYear()}</span> Soberana Segurança e Vigilância. CNPJ: [inserir]</span>
+ <span>© <span id="y">{year}</span> Soberana Segurança e Vigilância. CNPJ: [inserir]</span>
  <span>Desenvolvido por [inserir] · Fotos ilustrativas, apenas para demonstração de layout</span>
  </div>
  </div>
