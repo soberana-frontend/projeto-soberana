@@ -1,7 +1,7 @@
 /* Paleta Soberana: azul-marinho institucional, azul vivo, dourado e cinza K80 */
 :root {
   --bg: #1a2345;
-  --main-bg: #202057;
+  --main-bg: #27348B;
   --surf: #243060;
   --tx: #eef1fa;
   --mut: #b8c3e5;
@@ -17,7 +17,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #1a2345;
-    --main-bg: #202057;
+    --main-bg: #27348B;
     --surf: #243060;
     --tx: #eef1fa;
     --mut: #b8c3e5;
@@ -29,7 +29,7 @@
 
 :root[data-theme="dark"] {
   --bg: #1a2345;
-  --main-bg: #202057;
+  --main-bg: #27348B;
   --surf: #243060;
   --tx: #eef1fa;
   --mut: #b8c3e5;
