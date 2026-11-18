@@ -116,7 +116,7 @@ export default function Home() {
 
 				<div className="stats">
 					<div className="w">
-						<div className="stat-card"><strong>+[00] anos</strong><span>de atuação no mercado</span></div>
+						<div className="stat-card"><strong>+30 anos</strong><span>de atuação no mercado</span></div>
 						<div className="stat-card"><strong>+[000]</strong><span>postos de serviço atendidos</span></div>
 						<div className="stat-card"><strong>24 horas</strong><span>de atendimento e suporte à operação</span></div>
 					</div>
