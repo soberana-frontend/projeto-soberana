@@ -1,4 +1,4 @@
-import "./globals.css?v=7";
+import "./globals.css?v=8";
 
 export const metadata = {
   title: "Soberana Segurança e Vigilância – Águas Claras, DF",

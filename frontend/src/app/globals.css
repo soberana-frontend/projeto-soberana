@@ -73,95 +73,6 @@ img, svg, video {
   margin-inline: auto;
 }
 
-/* Top bar */
-.topbar {
-  background: #0f1638;
-  color: #b8c3e5;
-  font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.topbar-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.4rem 1rem;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.topbar-left {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.topbar-left a {
-  color: #d6dcf5;
-  transition: color 0.2s;
-}
-
-.topbar-left a:hover {
-  color: var(--gold);
-}
-
-.topbar-sep {
-  color: rgba(255,255,255,0.25);
-  user-select: none;
-}
-
-.topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.topbar-link {
-  color: #d6dcf5;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.topbar-link:hover {
-  color: var(--gold);
-}
-
-.topbar-social {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.topbar-social a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  color: #d6dcf5;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  transition: background 0.2s, color 0.2s;
-}
-
-.topbar-social a:hover {
-  background: var(--gold);
-  color: #0f1638;
-}
-
-/* Esconder topbar em mobile para economizar espaço */
-@media (max-width: 767px) {
-  .topbar-left {
-    display: none;
-  }
-  .topbar-inner {
-    justify-content: flex-end;
-  }
-}
-
 /* Header */
 .hd {
   background: var(--brand);
@@ -174,9 +85,8 @@ img, svg, video {
   align-items: center;
   justify-content: space-between;
   min-height: 4rem;
-  padding: 0 1rem;
-  width: min(100% - 2rem, 1200px);
-  margin-inline: auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  width: 100%;
 }
 
 .logo {
@@ -1079,8 +989,8 @@ footer {
   }
 }
 
-/* 4. Notebooks / Desktop padrão (a partir de 1024px) */
-@media (min-width: 1024px) {
+/* 3b. Tablets e desktop (a partir de 768px) — nav inline, sem hambúrguer */
+@media (min-width: 768px) {
   .burger {
     display: none;
   }
