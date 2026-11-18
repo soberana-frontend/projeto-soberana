@@ -143,6 +143,7 @@ export default function Home() {
  <p className="sub2">Arraste para girar e toque no card para selecionar.</p>
  </div>
  <div className="carousel-scene" id="cScene">
+ <div className="service-grid">
  <div className="carousel-ring" id="cRing" ref={ringRef}>
  <a className="c-face" href="#" data-i="0">
  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/></svg>
@@ -180,6 +181,7 @@ export default function Home() {
  <p>Proteção para pessoas e famílias</p>
  <i>Saiba mais →</i>
  </a>
+ </div>
  </div>
  <p className="carousel-hint">← Arraste para girar · Toque para selecionar →</p>
  </div>

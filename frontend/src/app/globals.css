@@ -1,10 +1,10 @@
-/* Paleta Soberana: azul-marinho institucional, azul vivo, dourado e cinza K80 */
+/* Paleta Soberana: azul-marinho institucional mais claro, azul vivo, dourado e cinza K80 */
 :root {
-  --bg: #0b1030;
-  --surf: #131a45;
+  --bg: #1a2345;
+  --surf: #243060;
   --tx: #eef1fa;
-  --mut: #a8b3d9;
-  --line: #262f66;
+  --mut: #b8c3e5;
+  --line: #3a4580;
   --brand: #2b3a91;
   --brand2: #1c2563;
   --gold: #ffcb05;
@@ -15,22 +15,22 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0b1030;
-    --surf: #131a45;
+    --bg: #1a2345;
+    --surf: #243060;
     --tx: #eef1fa;
-    --mut: #a8b3d9;
-    --line: #262f66;
+    --mut: #b8c3e5;
+    --line: #3a4580;
     --acc: #5cc8ff;
     color-scheme: dark;
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #0b1030;
-  --surf: #131a45;
+  --bg: #1a2345;
+  --surf: #243060;
   --tx: #eef1fa;
-  --mut: #a8b3d9;
-  --line: #262f66;
+  --mut: #b8c3e5;
+  --line: #3a4580;
   --acc: #5cc8ff;
   color-scheme: dark;
 }
@@ -609,51 +609,77 @@ h2 {
   }
 }
 
-/* Em desktop (>=768px): mostrar cards de serviços em grid */
+/* Em desktop (>=768px): esconder carrossel 3D e mostrar cards em grid */
 @media (min-width: 768px) {
   .carousel-scene {
-    display: block !important;
-    perspective: none;
-    overflow: visible;
-    padding: 2rem 0;
+    display: none !important;
   }
 
-  .carousel-ring {
-    position: static !important;
-    width: 100% !important;
-    height: auto !important;
-    transform: none !important;
-    transform-style: flat;
+  .service-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin: 0;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 0 1rem;
   }
 
-  .c-face {
-    position: static !important;
-    width: 100% !important;
-    height: auto !important;
-    min-height: 160px;
-    left: auto !important;
-    top: auto !important;
-    transform: none !important;
+  .service-grid .c-face {
+    position: static;
+    width: 100%;
+    height: auto;
+    min-height: 180px;
+    left: auto;
+    top: auto;
+    transform: none;
     backface-visibility: visible;
-    opacity: 1 !important;
-    filter: none !important;
-    pointer-events: auto !important;
+    opacity: 1;
+    filter: none;
+    pointer-events: auto;
     border-radius: 0.75rem;
     background: var(--surf);
     border: 1px solid var(--line);
     padding: 1.5rem;
-    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
   }
 
-  .c-face:hover {
-    transform: translateY(-4px) !important;
+  .service-grid .c-face:hover {
+    transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     border-color: var(--sky);
+  }
+
+  .service-grid .c-face svg {
+    width: 2rem;
+    height: 2rem;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-grid .c-face h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  .service-grid .c-face p {
+    margin: 0;
+    color: #d6dcf5;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .service-grid .c-face i {
+    display: none;
   }
 
   .carousel-hint {
@@ -667,9 +693,9 @@ h2 {
 }
 
 @media (min-width: 1024px) {
-  .carousel-ring {
+  .service-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 }
 
