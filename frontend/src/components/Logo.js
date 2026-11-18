@@ -1,62 +1,47 @@
-export default function Logo({ variant = 'default', className = '' }) {
-	const isWhite = variant === 'white';
-	const fillColor = isWhite ? '#ffffff' : '#ffffff';
-	const textColor = isWhite ? '#ffffff' : '#1a2345';
-
+export default function Logo({ className = '' }) {
 	return (
 		<svg
-			viewBox="0 0 200 120"
+			viewBox="0 0 300 50"
 			className={className}
 			xmlns="http://www.w3.org/2000/svg"
 			aria-label="Soberana Segurança e Vigilância"
 			role="img"
-			style={{ height: '60px', width: 'auto' }}
+			style={{ height: '46px', width: 'auto' }}
 		>
-			{/* Coroa com múltiplos pontos e faixas horizontais */}
-			<g transform="translate(60, 5)">
-				{/* Pontos da coroa - 7 pontas visíveis */}
+			{/* Coroa amarela */}
+			<g transform="translate(0, 3)">
 				<path
-					d="M0 55 L8 20 L16 40 L24 10 L32 35 L40 5 L48 35 L56 10 L64 40 L72 20 L80 55 Z"
-					fill={fillColor}
-					stroke="none"
+					d="M2 38 L7 14 L13 28 L19 4 L25 28 L31 8 L37 28 L43 14 L48 38 Z"
+					fill="#FFD215"
 				/>
-				{/* Faixa horizontal superior */}
-				<rect x="5" y="42" width="70" height="4" rx="1" fill={isWhite ? '#0d1330' : '#1a2345'} />
-				{/* Faixa horizontal inferior */}
-				<rect x="5" y="50" width="70" height="4" rx="1" fill={isWhite ? '#0d1330' : '#1a2345'} />
-				{/* Diamantes decorativos entre as faixas */}
-				<path d="M20 48 L22 45 L24 48 L22 51 Z" fill={fillColor} />
-				<path d="M38 48 L40 45 L42 48 L40 51 Z" fill={fillColor} />
-				<path d="M56 48 L58 45 L60 48 L58 51 Z" fill={fillColor} />
+				<rect x="4" y="36" width="42" height="3.5" rx="1" fill="#FFD215" />
+				<rect x="4" y="41" width="42" height="2.5" rx="1" fill="#FFD215" opacity="0.6" />
 			</g>
 
-			{/* Texto Soberana® */}
+			{/* SOBERANA */}
 			<text
-				x="100"
-				y="85"
-				textAnchor="middle"
-				fontFamily="'Montserrat', 'Inter', 'Segoe UI', sans-serif"
-				fontWeight="700"
-				fontSize="24"
-				fill={textColor}
-				letterSpacing="1"
+				x="58"
+				y="27"
+				fontFamily="'Montserrat', 'Inter', sans-serif"
+				fontWeight="800"
+				fontSize="22"
+				fill="#ffffff"
+				letterSpacing="2.5"
 			>
-				Soberana
-				<tspan fontSize="10" baselineShift="super">®</tspan>
+				SOBERANA
 			</text>
 
-			{/* Subtítulo */}
+			{/* SEGURANÇA E VIGILÂNCIA */}
 			<text
-				x="100"
-				y="105"
-				textAnchor="middle"
-				fontFamily="'Montserrat', 'Inter', 'Segoe UI', sans-serif"
+				x="58"
+				y="43"
+				fontFamily="'Montserrat', 'Inter', sans-serif"
 				fontWeight="400"
 				fontSize="9"
-				fill={isWhite ? 'rgba(255,255,255,0.9)' : '#5a6a9a'}
-				letterSpacing="1.5"
+				fill="rgba(255,255,255,0.8)"
+				letterSpacing="2"
 			>
-				Segurança e Vigilância LTDA
+				SEGURANÇA E VIGILÂNCIA
 			</text>
 		</svg>
 	);
