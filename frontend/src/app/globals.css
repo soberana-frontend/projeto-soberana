@@ -592,6 +592,11 @@ h2 {
   display: none;
 }
 
+/* Grid de serviços: oculto em mobile, visível em desktop */
+.service-grid {
+  display: none;
+}
+
 /* Exibir carrossel e dica apenas em telas pequenas (<768px) */
 @media (max-width: 767px) {
   .carousel-scene {
@@ -609,20 +614,8 @@ h2 {
   }
 }
 
-/* Em desktop (>=768px): esconder carrossel 3D e mostrar cards em grid */
+/* Em desktop (>=768px): mostrar grid de serviços */
 @media (min-width: 768px) {
-  /* Reexibir o container pai (que tem display:none na base) */
-  .carousel-scene {
-    display: block !important;
-    overflow: visible;
-    perspective: none;
-  }
-
-  /* Esconder apenas o anel 3D, não o wrapper service-grid */
-  .carousel-ring {
-    display: none !important;
-  }
-
   .service-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

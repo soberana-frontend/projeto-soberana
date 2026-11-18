@@ -1,0 +1,26 @@
+SOBERANA - PACOTE DE DEMONSTRACAO
+
+0. soberana-template-v4-paleta-catolica.html  Template v4: mesmo layout do v3 com a paleta de cores da Catolica (azul, azul vivo, cinza e amarelo)
+1. soberana-template-v3.html      Template v3 com fotos (versao mais completa, inspirada na estrutura do site da UCB, cores azul-marinho e dourado)
+2. soberana-template-v2.html      Template v2 (mesmo layout, sem fotos)
+3. soberana-template-moderno.html Template v1 (versao mais simples)
+4. soberana-simulacao.html        Simulador: site atual x proposta em tablet, Galaxy S25 e iPhone 16 Pro Max
+5. home-corrigido.asp             Home atual corrigida (HTML5, viewport, alt, acentos, rodape), mantendo o ASP
+6. imagens/                       Fotos usadas no v3 (hero.jpg, equipe.jpg, seguranca-pessoal.jpg)
+
+Como abrir: de dois cliques em qualquer arquivo .html para ver no navegador (nao precisa de internet).
+O arquivo .asp so funciona no servidor do site (IIS com ASP Classic).
+
+ATENCAO SOBRE AS FOTOS
+- Sao fotos ilustrativas, usadas apenas para demonstrar o layout. A origem e a licenca nao foram confirmadas.
+- Antes de publicar, trocar por fotos proprias da Soberana ou de banco de imagens com licenca comercial.
+- As fotos tem baixa resolucao (a da equipe tem 196 x 258 px). Para o site final, usar imagens maiores.
+
+Para preencher antes de publicar:
+- Trocar 55SEUNUMERO pelo WhatsApp da empresa (DDI + DDD + numero)
+- Itens entre colchetes [inserir], [00], [Nome], [data]
+- Link da Area restrita: usar https:// somente depois que a KingHost corrigir o certificado do webmail
+
+PALETA DA CATOLICA (v4)
+- Fonte: Manual de Marca da UCB (cores institucionais em CMYK). Os valores em hexadecimal foram aproximados por conversao e podem diferir do site oficial.
+- Azul institucional C100 M90 = #2b3a91 | Azul vivo C100 M20 = #0094d9 | Cinza K80 = #58595b | Preto = #231f20 | Amarelo (cor de escola) = #ffcb05
