@@ -391,7 +391,7 @@ h1 em {
   text-align: center;
 }
 
-/* Stats — Cards modernos com glassmorphism */
+/* Stats — Cards com fundo sólido e opacidade uniforme */
 .stats {
   margin-top: -3.5rem;
   position: relative;
@@ -406,10 +406,8 @@ h1 em {
 }
 
 .stat-card {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surf);
+  border: 1px solid var(--line);
   border-radius: 0.75rem;
   padding: 1.5rem 1.25rem;
   text-align: center;
@@ -418,8 +416,8 @@ h1 em {
 }
 
 .stat-card:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: #1a2255;
+  border-color: #3a4580;
 }
 
 /* Losango decorativo entre cards (desktop) */
@@ -431,7 +429,7 @@ h1 em {
 
   .stat-card {
     border-radius: 0;
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid var(--line);
     text-align: left;
     padding: 2rem 1.75rem;
   }
@@ -456,7 +454,7 @@ h1 em {
     background: var(--gold);
     transform: translateY(-50%) rotate(45deg);
     z-index: 2;
-    box-shadow: 0 0 8px rgba(245, 166, 35, 0.4);
+    box-shadow: 0 0 8px rgba(255, 203, 5, 0.4);
   }
 }
 
