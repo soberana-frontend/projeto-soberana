@@ -1,23 +1,15 @@
-const NEWS_ITEMS = [
-	{
-		big: true,
-		date: '[dd de mês de aaaa]',
-		title: '[Título da notícia principal]',
-		summary: 'Resumo da notícia em duas linhas.',
-	},
-	{
-		date: '[data]',
-		title: '[Título da notícia]',
-		summary: 'Resumo curto.',
-	},
-	{
-		date: '[data]',
-		title: '[Título da notícia]',
-		summary: 'Resumo curto.',
-	},
-];
+'use client';
+
+import { useEffect, useState } from 'react';
+import { getNews } from '@/lib/api';
 
 export default function News() {
+	const [news, setNews] = useState([]);
+
+	useEffect(() => {
+		getNews().then(setNews).catch(console.error);
+	}, []);
+
 	return (
 		<section id="noticias">
 			<div className="w">
@@ -25,9 +17,9 @@ export default function News() {
 				<h2>Notícias e novidades</h2>
 				<p className="sub2">Conecte-se com o que acontece na Soberana.</p>
 				<div className="news">
-					{NEWS_ITEMS.map((item, i) => (
-						<article key={i} className={`nw${item.big ? ' big' : ''}`}>
-							<div className="im" aria-hidden="true">{item.big ? 'Foto da notícia' : 'Foto'}</div>
+					{news.map((item) => (
+						<article key={item.id} className={`nw${item.featured ? ' big' : ''}`}>
+							<div className="im" aria-hidden="true">{item.featured ? 'Foto da notícia' : 'Foto'}</div>
 							<div className="t">
 								<time>{item.date}</time>
 								<h3>{item.title}</h3>
