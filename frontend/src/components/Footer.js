@@ -1,3 +1,5 @@
+import Logo from './Logo';
+
 const QUICK_LINKS = [
 	{ href: '#servicos', label: 'Serviços' },
 	{ href: '#segmentos', label: 'Para quem atuamos' },
@@ -28,14 +30,8 @@ export default function Footer() {
 			<div className="w">
 				<div className="fg">
 					<div>
-						<a className="logo" href="#" aria-label="Soberana">
-							<svg viewBox="0 0 24 24" aria-hidden="true">
-								<path d="M3 18h18l1-11-5 4-5-7-5 7-5-4z" />
-							</svg>
-							<span>
-								<b style={{ color: '#fff' }}>SOBERANA</b>
-								<small>Segurança e Vigilância</small>
-							</span>
+						<a className="logo" href="/" aria-label="Soberana – início">
+							<Logo variant="white" />
 						</a>
 						<div className="so">
 							{SOCIAL_LINKS.map((link) => (

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Logo from './Logo';
 
 const NAV_ITEMS = [
   { href: '#servicos', label: 'Serviços' },
@@ -30,14 +31,8 @@ export default function Header() {
 
   return (
     <header className="hd">
-      <a className="logo" href="#" aria-label="Soberana">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3 18h18l1-11-5 4-5-7-5 7-5-4z" />
-        </svg>
-        <span>
-          <b>SOBERANA</b>
-          <small>Segurança e Vigilância</small>
-        </span>
+      <a className="logo" href="/" aria-label="Soberana – início">
+        <Logo />
       </a>
 
       <button
