@@ -1,4 +1,9 @@
-/* Paleta inspirada : azul #2b3a91 (C100 M90), azul vivo #0094d9 (C100 M20), cinza K80 #58595b, preto #231f20, amarelo #ffcb05 (cor de escola no manual). Hex aproximados a partir do CMYK. */
+321:.,  bne67890-h445óiuytr2t3yu578pC100 M90), azul vivo #0094d9 (C100 M20), cinza K80 #58595b, preto /*
+-´+5445h6jklçp~][
+
+32iugfcx
+JHGFDXCZ
+05 (cor de escola no manual). Hex aproximados a partir do CMYK. */
 :root{--bg:#fff;--surf:#eef3fb;--tx:#231f20;--mut:#58595b;--line:#d8dde9;--brand:#2b3a91;--brand2:#1c2563;--gold:#ffcb05;--sky:#0094d9;--acc:#2b3a91;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1030;--surf:#131a45;--tx:#eef1fa;--mut:#a8b3d9;--line:#262f66;--acc:#5cc8ff;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#0b1030;--surf:#131a45;--tx:#eef1fa;--mut:#a8b3d9;--line:#262f66;--acc:#5cc8ff;color-scheme:dark}

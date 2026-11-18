@@ -72,72 +72,132 @@ img, svg, video {
 }
 
 main {
-  background: var(--main-bg);
-  color: #1a2345;
+  background: #E8EDF5 !important;
+  color: #1a2345 !important;
 }
 
 /* Textos dentro do main sobre fundo claro */
 main h2 {
-  color: #1a2345;
+  color: #1a2345 !important;
 }
 
 main .sub2 {
-  color: #4a5578;
+  color: #4a5578 !important;
 }
 
 main .eyebrow {
-  color: #2b3a91;
+  color: #2b3a91 !important;
+}
+
+/* Cards de segmento — fundo escuro preservado */
+main .seg article {
+  background: #1a2345 !important;
+  border-color: #3a4580 !important;
+  border-left-color: #0094d9 !important;
 }
 
 main .seg h3 {
-  color: #1a2345;
+  color: #ffffff !important;
 }
 
 main .seg p {
-  color: #4a5578;
+  color: #d6dcf5 !important;
 }
 
 main .seg a {
-  color: #2b3a91;
+  color: #0094d9 !important;
+}
+
+/* Cards de notícia — fundo escuro preservado */
+main .nw {
+  background: #1a2345 !important;
+  border-color: #3a4580 !important;
 }
 
 main .nw h3 {
-  color: #1a2345;
+  color: #ffffff !important;
 }
 
 main .nw p {
-  color: #4a5578;
+  color: #d6dcf5 !important;
 }
 
 main .nw time {
-  color: #6b7a9e;
+  color: #8892b0 !important;
 }
 
 main .nw a {
-  color: #2b3a91;
+  color: #0094d9 !important;
+}
+
+main .nw .im {
+  background: #243060 !important;
+  color: #8892b0 !important;
 }
 
 main .carousel-hint {
-  color: #4a5578;
+  color: #4a5578 !important;
 }
 
 /* Stats sobre fundo claro */
 main .stats strong {
-  color: #2b3a91;
+  color: #2b3a91 !important;
 }
 
 main .stats span {
-  color: #4a5578;
+  color: #4a5578 !important;
 }
 
 main .stat-card {
-  background: #ffffff;
-  border-color: #d0d8e8;
+  background: #ffffff !important;
+  border-color: #d0d8e8 !important;
 }
 
 main .stat-card:hover {
-  background: #f0f4fa;
-  border-color: #2b3a91;
+  background: #f0f4fa !important;
+  border-color: #2b3a91 !important;
+}
+
+/* Cards de serviço — fundo escuro preservado */
+main .service-grid .c-face {
+  background: #1a2345 !important;
+  border-color: #3a4580 !important;
+  color: #ffffff !important;
+}
+
+main .service-grid .c-face h3 {
+  color: #ffffff !important;
+}
+
+main .service-grid .c-face p {
+  color: #d6dcf5 !important;
+}
+
+main .service-grid .c-face:hover {
+  border-color: #0094d9 !important;
+}
+
+/* Seção alternativa dentro do main */
+main .alt {
+  background: #dde3f0 !important;
+}
+
+/* Cards de equipe dentro do main */
+main .pp {
+  background: #ffffff !important;
+  border-color: #d0d8e8 !important;
+}
+
+main .pp h3 {
+  color: #1a2345 !important;
+}
+
+main .pp p {
+  color: #4a5578 !important;
+}
+
+main .pp a {
+  color: #2b3a91 !important;
 }
 
 .w {
