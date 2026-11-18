@@ -301,7 +301,7 @@ export default function Home() {
 						<div><h3>Ache-nos</h3><p>ADE Conj. 20, Lt. 07<br/>Águas Claras – DF<br/>CEP 71989-300<br/>Tel.: <a href="tel:+556133996013">(61) 3399-6013</a><br/><a href="mailto:contato@soberanaseguranca.com.br">contato@soberanaseguranca.com.br</a></p></div>
 					</div>
 					<div className="fb">
-						<span>© <span id="y">{year}</span> Soberana Segurança e Vigilância. CNPJ: [inserir]</span>
+						<span>© <span id="y">{year}</span> Soberana Segurança e Vigilância. CNPJ: 01.066.493/0001-25</span>
 						<span>Desenvolvido por [inserir] · Fotos ilustrativas, apenas para demonstração de layout</span>
 					</div>
 				</div>
