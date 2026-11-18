@@ -71,40 +71,48 @@ export default function Home() {
 
 	return (
 		<>
-			<div className="util">
-				<div className="w">
-					<div></div>
-					<div className="r">
-						<a href="#">Área restrita</a>
+			{/* Top bar - contato e links rápidos */}
+			<div className="topbar">
+				<div className="w topbar-inner">
+					<div className="topbar-left">
+						<a href="tel:+556133996013" aria-label="Telefone">(61) 3399-6013</a>
+						<span className="topbar-sep">|</span>
+						<a href="mailto:contato@soberanaseguranca.com.br" aria-label="Email">contato@soberanaseguranca.com.br</a>
+					</div>
+					<div className="topbar-right">
+						<a href="#" className="topbar-link">Área restrita</a>
+						<div className="topbar-social">
+							<a href="https://facebook.com/soberana" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+							<a href="https://instagram.com/soberana" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+							<a href="https://linkedin.com/company/soberana" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+						</div>
 					</div>
 				</div>
 			</div>
 
 			<header className="hd">
-				<div className="w">
-					<a className="logo" href="#" aria-label="Soberana">
-						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18l1-11-5 4-5-7-5 7-5-4z"/></svg>
-						<span><b>SOBERANA</b><small>Segurança e Vigilância</small></span>
-					</a>
-					<button className="burger" id="bg" aria-controls="nav" aria-expanded="false" aria-label="Menu">☰</button>
-					<nav id="nav">
-						<ul>
-							<li><a href="#servicos">Serviços</a></li>
-							<li><a href="#segmentos">Para quem atuamos</a></li>
-							<li>
-								<details>
-									<summary>Institucional</summary>
-									<div className="sub">
-										<a href="#equipe">Nossa equipe</a>
-										<a href="#institucional">Liderança</a>
-									</div>
-								</details>
-							</li>
-							<li><a href="#noticias">Notícias</a></li>
-							<li><a className="btn" href="/orcamento">Solicitar orçamento</a></li>
-						</ul>
-					</nav>
-				</div>
+				<a className="logo" href="#" aria-label="Soberana">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18l1-11-5 4-5-7-5 7-5-4z"/></svg>
+					<span><b>SOBERANA</b><small>Segurança e Vigilância</small></span>
+				</a>
+				<button className="burger" id="bg" aria-controls="nav" aria-expanded="false" aria-label="Menu">☰</button>
+				<nav id="nav">
+					<ul>
+						<li><a href="#servicos">Serviços</a></li>
+						<li><a href="#segmentos">Para quem atuamos</a></li>
+						<li>
+							<details>
+								<summary>Institucional</summary>
+								<div className="sub">
+									<a href="#equipe">Nossa equipe</a>
+									<a href="#institucional">Liderança</a>
+								</div>
+							</details>
+						</li>
+						<li><a href="#noticias">Notícias</a></li>
+						<li><a className="btn" href="/orcamento">Solicitar orçamento</a></li>
+					</ul>
+				</nav>
 			</header>
 
 			<main>
