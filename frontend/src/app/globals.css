@@ -73,6 +73,71 @@ img, svg, video {
 
 main {
   background: var(--main-bg);
+  color: #1a2345;
+}
+
+/* Textos dentro do main sobre fundo claro */
+main h2 {
+  color: #1a2345;
+}
+
+main .sub2 {
+  color: #4a5578;
+}
+
+main .eyebrow {
+  color: #2b3a91;
+}
+
+main .seg h3 {
+  color: #1a2345;
+}
+
+main .seg p {
+  color: #4a5578;
+}
+
+main .seg a {
+  color: #2b3a91;
+}
+
+main .nw h3 {
+  color: #1a2345;
+}
+
+main .nw p {
+  color: #4a5578;
+}
+
+main .nw time {
+  color: #6b7a9e;
+}
+
+main .nw a {
+  color: #2b3a91;
+}
+
+main .carousel-hint {
+  color: #4a5578;
+}
+
+/* Stats sobre fundo claro */
+main .stats strong {
+  color: #2b3a91;
+}
+
+main .stats span {
+  color: #4a5578;
+}
+
+main .stat-card {
+  background: #ffffff;
+  border-color: #d0d8e8;
+}
+
+main .stat-card:hover {
+  background: #f0f4fa;
+  border-color: #2b3a91;
 }
 
 .w {
@@ -568,6 +633,71 @@ h2 {
   font-size: 0.8rem;
   margin-top: 0.6rem;
   display: none;
+}
+
+/* Cards de serviço sobre fundo claro — preservar estilo escuro */
+main .service-grid .c-face {
+  background: #1a2345;
+  border-color: #3a4580;
+  color: #fff;
+}
+
+main .service-grid .c-face h3 {
+  color: #fff;
+}
+
+main .service-grid .c-face p {
+  color: #d6dcf5;
+}
+
+main .service-grid .c-face:hover {
+  border-color: var(--sky);
+}
+
+/* Cards de segmento sobre fundo claro — preservar estilo escuro */
+main .seg article {
+  background: #1a2345;
+  border-color: #3a4580;
+  border-left-color: var(--sky);
+}
+
+main .seg article h3 {
+  color: #fff;
+}
+
+main .seg article p {
+  color: #d6dcf5;
+}
+
+main .seg article a {
+  color: var(--sky);
+}
+
+/* Cards de notícia sobre fundo claro — preservar estilo escuro */
+main .nw {
+  background: #1a2345;
+  border-color: #3a4580;
+}
+
+main .nw h3 {
+  color: #fff;
+}
+
+main .nw p {
+  color: #d6dcf5;
+}
+
+main .nw time {
+  color: #8892b0;
+}
+
+main .nw a {
+  color: var(--sky);
+}
+
+main .nw .im {
+  background: #243060;
+  color: #8892b0;
 }
 
 /* Grid de serviços: oculto em mobile, visível em desktop */
