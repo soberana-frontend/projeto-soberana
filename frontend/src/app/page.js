@@ -73,10 +73,7 @@ export default function Home() {
 		<>
 			<div className="util">
 				<div className="w">
-					<div>
-						<a href="tel:+556133996013">(61) 3399-6013</a>
-						<a href="mailto:contato@soberanaseguranca.com.br">contato@soberanaseguranca.com.br</a>
-					</div>
+					<div></div>
 					<div className="r">
 						<a href="#">Área restrita</a>
 					</div>
@@ -312,7 +309,7 @@ export default function Home() {
 						</div>
 						<div><h3>Acesso rápido</h3><ul><li><a href="#servicos">Serviços</a></li><li><a href="#segmentos">Para quem atuamos</a></li><li><a href="#noticias">Notícias</a></li><li><a href="/orcamento">Solicitar orçamento</a></li></ul></div>
 						<div><h3>Institucional</h3><ul><li><a href="#">Prêmios e parceiros</a></li><li><a href="#">Ouvidoria</a></li><li><a href="#">Canal de conduta ética</a></li><li><a href="#">Proteção de dados (LGPD)</a></li><li><a href="#" target="_blank" rel="noopener noreferrer">Trabalhe conosco</a></li></ul></div>
-						<div><h3>Ache-nos</h3><p>ADE Conj. 20, Lt. 07<br/>Águas Claras – DF<br/>CEP 71989-300<br/>Tel.: <a href="tel:+556133996013">(61) 3399-6013</a></p></div>
+						<div><h3>Ache-nos</h3><p>ADE Conj. 20, Lt. 07<br/>Águas Claras – DF<br/>CEP 71989-300<br/>Tel.: <a href="tel:+556133996013">(61) 3399-6013</a><br/><a href="mailto:contato@soberanaseguranca.com.br">contato@soberanaseguranca.com.br</a></p></div>
 					</div>
 					<div className="fb">
 						<span>© <span id="y">{year}</span> Soberana Segurança e Vigilância. CNPJ: [inserir]</span>
