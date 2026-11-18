@@ -11,6 +11,7 @@ const NAV_ITEMS = [
 const INSTITUTIONAL_LINKS = [
   { href: '/institucional', label: 'Nossa história' },
   { href: '/premios', label: 'Prêmios e certificações' },
+  { href: '/parceiros', label: 'Parceiros' },
   { href: '#equipe', label: 'Nossa equipe' },
   { href: '#institucional', label: 'Liderança' },
 ];
