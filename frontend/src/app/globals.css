@@ -611,7 +611,8 @@ h2 {
 
 /* Em desktop (>=768px): esconder carrossel 3D e mostrar cards em grid */
 @media (min-width: 768px) {
-  .carousel-scene {
+  /* Esconder apenas o anel 3D, não o wrapper service-grid */
+  .carousel-ring {
     display: none !important;
   }
 
