@@ -1,37 +1,37 @@
-/* Paleta Vercel-inspired: fundo preto/azul profundo, cards sutis, tipografia limpa */
+/* Paleta Soberana: azul-marinho institucional, azul vivo, dourado e cinza K80 */
 :root {
-  --bg: #000000;
-  --surf: #0a0a0a;
-  --tx: #ededed;
-  --mut: #a1a1aa;
-  --line: #27272a;
-  --brand: #0070f3;
-  --brand2: #005bb5;
-  --gold: #f5a623;
-  --sky: #38bdf8;
-  --acc: #38bdf8;
+  --bg: #0b1030;
+  --surf: #131a45;
+  --tx: #eef1fa;
+  --mut: #a8b3d9;
+  --line: #262f66;
+  --brand: #2b3a91;
+  --brand2: #1c2563;
+  --gold: #ffcb05;
+  --sky: #0094d9;
+  --acc: #5cc8ff;
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #000000;
-    --surf: #0a0a0a;
-    --tx: #ededed;
-    --mut: #a1a1aa;
-    --line: #27272a;
-    --acc: #38bdf8;
+    --bg: #0b1030;
+    --surf: #131a45;
+    --tx: #eef1fa;
+    --mut: #a8b3d9;
+    --line: #262f66;
+    --acc: #5cc8ff;
     color-scheme: dark;
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #000000;
-  --surf: #0a0a0a;
-  --tx: #ededed;
-  --mut: #a1a1aa;
-  --line: #27272a;
-  --acc: #38bdf8;
+  --bg: #0b1030;
+  --surf: #131a45;
+  --tx: #eef1fa;
+  --mut: #a8b3d9;
+  --line: #262f66;
+  --acc: #5cc8ff;
   color-scheme: dark;
 }
 
