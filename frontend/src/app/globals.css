@@ -75,7 +75,7 @@ img, svg, video {
 
 /* Utilitários */
 .util {
-  background: #141a47;
+  background: var(--brand);
   color: #d6dcf5;
   font-size: clamp(0.75rem, 2vw, 0.85rem);
 }
