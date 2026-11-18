@@ -589,6 +589,88 @@ h2 {
   color: var(--mut);
   font-size: 0.8rem;
   margin-top: 0.6rem;
+  display: none;
+}
+
+/* Exibir carrossel e dica apenas em telas pequenas (<768px) */
+@media (max-width: 767px) {
+  .carousel-scene {
+    display: block;
+  }
+
+  .carousel-hint {
+    display: block;
+  }
+
+  /* Esconder subtítulo "Arraste para girar..." dentro do .w em mobile,
+     pois a .carousel-hint já cumpre esse papel abaixo do carrossel */
+  #servicos .sub2 {
+    display: none;
+  }
+}
+
+/* Em desktop (>=768px): mostrar cards de serviços em grid */
+@media (min-width: 768px) {
+  .carousel-scene {
+    display: block !important;
+    perspective: none;
+    overflow: visible;
+    padding: 2rem 0;
+  }
+
+  .carousel-ring {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    transform-style: flat;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 0;
+  }
+
+  .c-face {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 160px;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    backface-visibility: visible;
+    opacity: 1 !important;
+    filter: none !important;
+    pointer-events: auto !important;
+    border-radius: 0.75rem;
+    background: var(--surf);
+    border: 1px solid var(--line);
+    padding: 1.5rem;
+    gap: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .c-face:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    border-color: var(--sky);
+  }
+
+  .carousel-hint {
+    display: none !important;
+  }
+
+  /* Esconder subtítulo "Arraste para girar..." em desktop */
+  #servicos .sub2 {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-ring {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
 }
 
 /* Segmentos */
