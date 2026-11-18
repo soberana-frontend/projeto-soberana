@@ -1,115 +1,255 @@
 'use client';
 
 import { useState } from 'react';
-
-const SERVICOS = [
-  'Vigilância Patrimonial',
-  'Portaria e Controle de Acesso',
-  'Monitoramento Eletrônico',
-  'Escolta Armada',
-  'Segurança para Eventos',
-  'Segurança Pessoal',
-  'Outro'
-];
-
-const SEGMENTOS = [
-  'Condomínio Residencial',
-  'Condomínio Comercial',
-  'Empresa / Indústria',
-  'Hospital / Clínica',
-  'Embaixada / Consulado',
-  'Evento Corporativo',
-  'Evento Social',
-  'Residência',
-  'Outro'
-];
+import { submitBudget } from '@/lib/api';
 
 export default function OrcamentoPage() {
-  const [formData, setFormData] = useState({
-    nome: '',
-    empresa: '',
-    email: '',
-    telefone: '',
-    servico: '',
-    segmento: '',
-    urgencia: 'normal',
-    mensagem: ''
-  });
+	const [formData, setFormData] = useState({
+ name: '',
+ email: '',
+ phone: '',
+ company: '',
+ serviceType: '',
+ message: '',
+	});
+	const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+	const [errorMessage, setErrorMessage] = useState('');
 
-  const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+	const handleChange = (e) => {
+ const { name, value } = e.target;
+ setFormData((prev) => ({ ...prev, [name]: value }));
+	};
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const texto = `*SOLICITAÇÃO DE ORÇAMENTO - SOBERANA*%0A%0A*Nome:* ${formData.nome}%0A*Empresa:* ${formData.empresa || '-'}%0A*Email:* ${formData.email}%0A*Telefone:* ${formData.telefone}%0A*Serviço:* ${formData.servico}%0A*Segmento:* ${formData.segmento}%0A*Urgência:* ${formData.urgencia === 'urgente' ? '🔴 URGENTE' : 'Normal'}%0A*Mensagem:* ${formData.mensagem || '-'}`;
-    window.open(`https://wa.me/556133996013?text=${texto}`, '_blank');
-  };
+	const handleSubmit = async (e) => {
+ e.preventDefault();
+ setStatus('submitting');
+ setErrorMessage('');
 
-  return (
-    <main className="orc-page">
-      <div className="orc-container">
-        <div className="orc-header">
-          <p className="eyebrow">Fale com a Soberana</p>
-          <h1>Solicite seu orçamento</h1>
-          <p className="orc-sub">Preencha o formulário abaixo e receba uma proposta personalizada em até 24 horas. Para atendimentos urgentes, selecione a opção de urgência.</p>
-        </div>
+ try {
+ await submitBudget(formData);
+ setStatus('success');
+ setFormData({
+ name: '',
+ email: '',
+ phone: '',
+ company: '',
+ serviceType: '',
+ message: '',
+ });
+ } catch (err) {
+ setStatus('error');
+ setErrorMessage('Erro ao enviar solicitação. Tente novamente ou entre em contato por telefone.');
+ }
+	};
 
-        <form className="orc-form" onSubmit={handleSubmit}>
-          <div className="orc-grid">
-            <div className="orc-field">
-              <label htmlFor="nome">Nome completo *</label>
-              <input id="nome" name="nome" type="text" required value={formData.nome} onChange={handleChange} placeholder="Seu nome" />
-            </div>
-            <div className="orc-field">
-              <label htmlFor="empresa">Empresa / Condomínio</label>
-              <input id="empresa" name="empresa" type="text" value={formData.empresa} onChange={handleChange} placeholder="Nome da empresa ou condomínio" />
-            </div>
-            <div className="orc-field">
-              <label htmlFor="email">E-mail *</label>
-              <input id="email" name="email" type="email" required value={formData.email} onChange={handleChange} placeholder="seu@email.com" />
-            </div>
-            <div className="orc-field">
-              <label htmlFor="telefone">Telefone / WhatsApp *</label>
-              <input id="telefone" name="telefone" type="tel" required value={formData.telefone} onChange={handleChange} placeholder="(61) 99999-9999" />
-            </div>
-          </div>
+	if (status === 'success') {
+ return (
+ <main style={{ padding: '4rem 1rem', maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+ <div style={{ background: 'var(--surf)', padding: '3rem', borderRadius: '12px' }}>
+ <h1 style={{ color: 'var(--gold)', marginBottom: '1rem' }}>Solicitação enviada!</h1>
+ <p style={{ color: 'var(--tx)', fontSize: '1.1rem', marginBottom: '2rem' }}>
+ Recebemos sua solicitação de orçamento. Nossa equipe entrará em contato em breve.
+ </p>
+ <a href="/" className="btn" style={{ display: 'inline-block' }}>
+ Voltar ao início
+ </a>
+ </div>
+ </main>
+ );
+	}
 
-          <div className="orc-grid">
-            <div className="orc-field">
-              <label htmlFor="servico">Serviço desejado *</label>
-              <select id="servico" name="servico" required value={formData.servico} onChange={handleChange}>
-                <option value="">Selecione o serviço</option>
-                {SERVICOS.map(s => <option key={s} value={s}>{s}</option>)}
-              </select>
-            </div>
-            <div className="orc-field">
-              <label htmlFor="segmento">Segmento *</label>
-              <select id="segmento" name="segmento" required value={formData.segmento} onChange={handleChange}>
-                <option value="">Selecione o segmento</option>
-                {SEGMENTOS.map(s => <option key={s} value={s}>{s}</option>)}
-              </select>
-            </div>
-            <div className="orc-field">
-              <label htmlFor="urgencia">Nível de urgência *</label>
-              <select id="urgencia" name="urgencia" required value={formData.urgencia} onChange={handleChange}>
-                <option value="normal">Normal — resposta em até 24h</option>
-                <option value="urgente">🔴 Urgente — preciso de resposta imediata</option>
-              </select>
-            </div>
-          </div>
+	return (
+ <main style={{ padding: '4rem 1rem', maxWidth: '800px', margin: '0 auto' }}>
+ <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+ <p className="eyebrow" style={{ color: 'var(--sky)' }}>Orçamento</p>
+ <h1>Solicite seu orçamento personalizado</h1>
+ <p style={{ color: 'var(--mut)', fontSize: '1.1rem', marginTop: '1rem' }}>
+ Conte-nos sobre sua necessidade e receba uma proposta sob medida.
+ </p>
+ </div>
 
-          <div className="orc-field full">
-            <label htmlFor="mensagem">Detalhes adicionais</label>
-            <textarea id="mensagem" name="mensagem" rows={4} value={formData.mensagem} onChange={handleChange} placeholder="Descreva o local, quantidade de postos, horários, datas de evento ou qualquer informação relevante..." />
-          </div>
+ <form onSubmit={handleSubmit} style={{ background: 'var(--surf)', padding: '2rem', borderRadius: '12px' }}>
+ <div style={{ display: 'grid', gap: '1.5rem' }}>
+ <div>
+ <label htmlFor="name" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--tx)', fontWeight: '500' }}>
+ Nome completo *
+ </label>
+ <input
+ type="text"
+ id="name"
+ name="name"
+ value={formData.name}
+ onChange={handleChange}
+ required
+ style={{
+ width: '100%',
+ padding: '0.75rem',
+ borderRadius: '6px',
+ border: '1px solid var(--line)',
+ background: 'var(--bg)',
+ color: 'var(--tx)',
+ fontSize: '1rem',
+ }}
+ />
+ </div>
 
-          <button type="submit" className={`btn orc-btn ${formData.urgencia === 'urgente' ? 'orc-btn--urgente' : ''}`}>
-            {formData.urgencia === 'urgente' ? 'Enviar solicitação urgente' : 'Solicitar orçamento'}
-          </button>
-          <p className="orc-note">Ao enviar, você será redirecionado para o WhatsApp da Soberana com os dados preenchidos.</p>
-        </form>
-      </div>
-    </main>
-  );
+ <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
+ <div>
+ <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--tx)', fontWeight: '500' }}>
+ E-mail *
+ </label>
+ <input
+ type="email"
+ id="email"
+ name="email"
+ value={formData.email}
+ onChange={handleChange}
+ required
+ style={{
+ width: '100%',
+ padding: '0.75rem',
+ borderRadius: '6px',
+ border: '1px solid var(--line)',
+ background: 'var(--bg)',
+ color: 'var(--tx)',
+ fontSize: '1rem',
+ }}
+ />
+ </div>
+
+ <div>
+ <label htmlFor="phone" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--tx)', fontWeight: '500' }}>
+ Telefone
+ </label>
+ <input
+ type="tel"
+ id="phone"
+ name="phone"
+ value={formData.phone}
+ onChange={handleChange}
+ placeholder="(61) 99999-9999"
+ style={{
+ width: '100%',
+ padding: '0.75rem',
+ borderRadius: '6px',
+ border: '1px solid var(--line)',
+ background: 'var(--bg)',
+ color: 'var(--tx)',
+ fontSize: '1rem',
+ }}
+ />
+ </div>
+ </div>
+
+ <div>
+ <label htmlFor="company" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--tx)', fontWeight: '500' }}>
+ Empresa
+ </label>
+ <input
+ type="text"
+ id="company"
+ name="company"
+ value={formData.company}
+ onChange={handleChange}
+ style={{
+ width: '100%',
+ padding: '0.75rem',
+ borderRadius: '6px',
+ border: '1px solid var(--line)',
+ background: 'var(--bg)',
+ color: 'var(--tx)',
+ fontSize: '1rem',
+ }}
+ />
+ </div>
+
+ <div>
+ <label htmlFor="serviceType" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--tx)', fontWeight: '500' }}>
+ Tipo de serviço
+ </label>
+ <select
+ id="serviceType"
+ name="serviceType"
+ value={formData.serviceType}
+ onChange={handleChange}
+ style={{
+ width: '100%',
+ padding: '0.75rem',
+ borderRadius: '6px',
+ border: '1px solid var(--line)',
+ background: 'var(--bg)',
+ color: 'var(--tx)',
+ fontSize: '1rem',
+ }}
+ >
+ <option value="">Selecione um serviço</option>
+ <option value="vigilancia">Vigilância patrimonial</option>
+ <option value="portaria">Portaria e acesso</option>
+ <option value="monitoramento">Monitoramento</option>
+ <option value="escolta">Escolta</option>
+ <option value="eventos">Eventos</option>
+ <option value="seguranca-pessoal">Segurança pessoal</option>
+ </select>
+ </div>
+
+ <div>
+ <label htmlFor="message" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--tx)', fontWeight: '500' }}>
+ Mensagem *
+ </label>
+ <textarea
+ id="message"
+ name="message"
+ value={formData.message}
+ onChange={handleChange}
+ required
+ rows="5"
+ placeholder="Descreva sua necessidade, local, número de postos, horário de operação..."
+ style={{
+ width: '100%',
+ padding: '0.75rem',
+ borderRadius: '6px',
+ border: '1px solid var(--line)',
+ background: 'var(--bg)',
+ color: 'var(--tx)',
+ fontSize: '1rem',
+ resize: 'vertical',
+ fontFamily: 'inherit',
+ }}
+ />
+ </div>
+
+ {status === 'error' && (
+ <div style={{ padding: '1rem', background: '#5c1a1a', borderRadius: '6px', color: '#ffcccc' }}>
+ {errorMessage}
+ </div>
+ )}
+
+ <button
+ type="submit"
+ disabled={status === 'submitting'}
+ className="btn"
+ style={{
+ width: '100%',
+ padding: '1rem',
+ fontSize: '1.1rem',
+ fontWeight: '600',
+ cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
+ opacity: status === 'submitting' ? 0.7 : 1,
+ }}
+ >
+ {status === 'submitting' ? 'Enviando...' : 'Solicitar orçamento'}
+ </button>
+ </div>
+
+ <div style={{ marginTop: '2rem', textAlign: 'center', color: 'var(--mut)' }}>
+ <p>Ou entre em contato diretamente:</p>
+ <p style={{ marginTop: '0.5rem' }}>
+ <a href="tel:+556133996013" style={{ color: 'var(--sky)' }}>(61) 3399-6013</a>
+ {' · '}
+ <a href="https://wa.me/5561999999999" style={{ color: 'var(--sky)' }}>WhatsApp</a>
+ </p>
+ </div>
+ </form>
+ </main>
+	);
 }
