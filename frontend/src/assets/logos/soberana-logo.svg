@@ -1,0 +1,9 @@
+<svg viewBox="0 0 320 50" xmlns="http://www.w3.org/2000/svg" aria-label="Soberana Segurança e Vigilância" role="img">
+  <g transform="translate(0,3)">
+    <path d="M2 38 L7 14 L13 28 L19 4 L25 28 L31 8 L37 28 L43 14 L48 38 Z" fill="#FFD215"/>
+    <rect x="4" y="36" width="42" height="3.5" rx="1" fill="#FFD215"/>
+    <rect x="4" y="41" width="42" height="2.5" rx="1" fill="#FFD215" opacity="0.6"/>
+  </g>
+  <text x="58" y="27" font-family="'Montserrat', sans-serif" font-weight="800" font-size="22" fill="currentColor" letter-spacing="2.5">SOBERANA</text>
+  <text x="58" y="43" font-family="'Montserrat', sans-serif" font-weight="400" font-size="9" fill="currentColor" opacity="0.8" letter-spacing="2">SEGURANÇA E VIGILÂNCIA</text>
+</svg>

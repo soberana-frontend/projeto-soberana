@@ -1,0 +1,1 @@
+export { default as soberanaLogo } from './soberana-logo.svg';
