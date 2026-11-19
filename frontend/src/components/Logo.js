@@ -11,40 +11,37 @@ export default function Logo({ variant = 'default', className = '' }) {
 			xmlns="http://www.w3.org/2000/svg"
 			aria-label="Soberana Segurança e Vigilância"
 			role="img"
-			style={{ height: '48px', width: 'auto' }}
+			style={{ height: 'clamp(2.5rem, 5vw, 3.5rem)', width: 'auto' }}
 		>
-			{/* Coroa amarela com 3 picos */}
-			<g transform="translate(5, 3)">
-				<path
-					d="M2 42 L6 18 L11 32 L16 8 L21 28 L26 4 L31 28 L36 8 L41 32 L46 18 L50 42 Z"
-					fill={crownColor}
-				/>
-				<rect x="4" y="40" width="44" height="3.5" rx="1" fill={crownColor} />
-				<rect x="4" y="45" width="44" height="2.5" rx="1" fill={crownColor} opacity="0.6" />
+			{/* Coroa — Modelo 1 Clássico Horizontal */}
+			<g transform="translate(0,3)">
+				<path d="M2 38 L7 14 L13 28 L19 4 L25 28 L31 8 L37 28 L43 14 L48 38 Z" fill={crownColor} />
+				<rect x="4" y="36" width="42" height="3.5" rx="1" fill={crownColor} />
+				<rect x="4" y="41" width="42" height="2.5" rx="1" fill={crownColor} opacity="0.6" />
 			</g>
 
 			{/* SOBERANA */}
 			<text
-				x="68"
-				y="30"
-				fontFamily="'Montserrat', 'Inter', sans-serif"
+				x="58"
+				y="27"
+				fontFamily="'Montserrat', sans-serif"
 				fontWeight="800"
-				fontSize="24"
+				fontSize="22"
 				fill={textColor}
-				letterSpacing="3"
+				letterSpacing="2.5"
 			>
 				SOBERANA
 			</text>
 
 			{/* SEGURANÇA E VIGILÂNCIA */}
 			<text
-				x="68"
-				y="47"
-				fontFamily="'Montserrat', 'Inter', sans-serif"
+				x="58"
+				y="43"
+				fontFamily="'Montserrat', sans-serif"
 				fontWeight="400"
-				fontSize="10"
+				fontSize="9"
 				fill={subtitleColor}
-				letterSpacing="2.5"
+				letterSpacing="2"
 			>
 				SEGURANÇA E VIGILÂNCIA
 			</text>

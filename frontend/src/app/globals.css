@@ -113,7 +113,7 @@ main .eyebrow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 4rem;
+  min-height: 4.625rem;
   padding: 0 clamp(1rem, 4vw, 3rem);
   width: 100%;
 }
