@@ -1,45 +1,50 @@
-export default function Logo({ className = '' }) {
+export default function Logo({ variant = 'default', className = '' }) {
+	const isLight = variant === 'light';
+	const textColor = isLight ? '#1B2341' : '#ffffff';
+	const subtitleColor = isLight ? 'rgba(27, 35, 65, 0.7)' : 'rgba(255,255,255,0.8)';
+	const crownColor = '#FFD215';
+
 	return (
 		<svg
-			viewBox="0 0 300 50"
+			viewBox="0 0 320 50"
 			className={className}
 			xmlns="http://www.w3.org/2000/svg"
 			aria-label="Soberana Segurança e Vigilância"
 			role="img"
-			style={{ height: '46px', width: 'auto' }}
+			style={{ height: '48px', width: 'auto' }}
 		>
-			{/* Coroa amarela */}
-			<g transform="translate(0, 3)">
+			{/* Coroa amarela com 3 picos */}
+			<g transform="translate(5, 3)">
 				<path
-					d="M2 38 L7 14 L13 28 L19 4 L25 28 L31 8 L37 28 L43 14 L48 38 Z"
-					fill="#FFD215"
+					d="M2 42 L6 18 L11 32 L16 8 L21 28 L26 4 L31 28 L36 8 L41 32 L46 18 L50 42 Z"
+					fill={crownColor}
 				/>
-				<rect x="4" y="36" width="42" height="3.5" rx="1" fill="#FFD215" />
-				<rect x="4" y="41" width="42" height="2.5" rx="1" fill="#FFD215" opacity="0.6" />
+				<rect x="4" y="40" width="44" height="3.5" rx="1" fill={crownColor} />
+				<rect x="4" y="45" width="44" height="2.5" rx="1" fill={crownColor} opacity="0.6" />
 			</g>
 
 			{/* SOBERANA */}
 			<text
-				x="58"
-				y="27"
+				x="68"
+				y="30"
 				fontFamily="'Montserrat', 'Inter', sans-serif"
 				fontWeight="800"
-				fontSize="22"
-				fill="#ffffff"
-				letterSpacing="2.5"
+				fontSize="24"
+				fill={textColor}
+				letterSpacing="3"
 			>
 				SOBERANA
 			</text>
 
 			{/* SEGURANÇA E VIGILÂNCIA */}
 			<text
-				x="58"
-				y="43"
+				x="68"
+				y="47"
 				fontFamily="'Montserrat', 'Inter', sans-serif"
 				fontWeight="400"
-				fontSize="9"
-				fill="rgba(255,255,255,0.8)"
-				letterSpacing="2"
+				fontSize="10"
+				fill={subtitleColor}
+				letterSpacing="2.5"
 			>
 				SEGURANÇA E VIGILÂNCIA
 			</text>
