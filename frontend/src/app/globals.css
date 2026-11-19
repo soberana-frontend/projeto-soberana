@@ -127,23 +127,9 @@ main .eyebrow {
 }
 
 .logo svg {
-  width: 1.75rem;
-  height: 1.75rem;
-  fill: var(--gold);
+  height: clamp(2rem, 5vw, 3rem);
+  width: auto;
   flex-shrink: 0;
-}
-
-.logo b {
-  display: block;
-  letter-spacing: 0.12em;
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-}
-
-.logo small {
-  font-size: clamp(0.6rem, 1.5vw, 0.75rem);
-  color: #d6dcf5;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 
 .burger {

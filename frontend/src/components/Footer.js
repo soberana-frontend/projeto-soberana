@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Logo from './Logo';
 
 const QUICK_LINKS = [
@@ -23,7 +26,11 @@ const SOCIAL_LINKS = [
 ];
 
 export default function Footer() {
-	const year = new Date().getFullYear();
+	const [year, setYear] = useState(2026);
+
+	useEffect(() => {
+		setYear(new Date().getFullYear());
+	}, []);
 
 	return (
 		<footer>
