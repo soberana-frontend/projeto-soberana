@@ -530,6 +530,8 @@ h1 em {
 .credentials {
   padding: 3rem 0;
   background: var(--main-bg);
+  position: relative;
+  z-index: 5;
 }
 
 .credentials-grid {
@@ -781,7 +783,11 @@ section {
 
 .hero { animation-delay: 0.1s; }
 .stats { animation-delay: 0.2s; }
-#servicos { animation-delay: 0.3s; }
+#servicos {
+ position: relative;
+ z-index: 1;
+ animation-delay: 0.3s;
+}
 #segmentos { animation-delay: 0.4s; }
 #equipe { animation-delay: 0.5s; }
 #institucional { animation-delay: 0.6s; }
