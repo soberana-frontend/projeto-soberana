@@ -554,10 +554,15 @@ h1 em {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   text-align: center;
   position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: visible;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.credentials-grid .cred-card {
+  height: 100%;
 }
 
 .cred-card::before {
@@ -572,9 +577,13 @@ h1 em {
   border-radius: 0 0 2px 2px;
 }
 
-.cred-card:hover {
+.cred-card:not(.cred-card--open):hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.cred-card--open:hover {
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
