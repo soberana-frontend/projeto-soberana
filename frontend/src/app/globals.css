@@ -116,18 +116,25 @@ main .eyebrow {
 
 /* --- Header --- */
 .hd {
-  background: #1B2341;
+  background: rgba(27, 35, 65, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: #fff;
   position: sticky;
   top: 0;
   z-index: 50;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 72px;
   padding: 0 24px;
   width: 100%;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hd:hover {
+  background: rgba(27, 35, 65, 0.95);
 }
 
 .logo {
