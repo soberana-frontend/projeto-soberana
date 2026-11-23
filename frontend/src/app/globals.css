@@ -299,7 +299,7 @@ nav .btn {
   overflow: visible;
   min-height: min(100svh, 56rem);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .hero-video {
