@@ -3,6 +3,7 @@ import Footer from '@/components/ui/Footer';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import CtaBanner from '@/components/ui/CtaBanner';
 import { Hero, Stats } from '@/features/hero';
+import { CredentialCards } from '@/features/credentials';
 import { ServicesCarousel } from '@/features/services';
 import { Segments } from '@/features/segments';
 import { Team, Leadership } from '@/features/team';
@@ -19,6 +20,7 @@ export default async function Home() {
 			<main>
 				<Hero />
 				<Stats />
+				<CredentialCards />
 				<ServicesCarousel services={services} />
 				<Segments />
 				<Team />

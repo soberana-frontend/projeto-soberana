@@ -526,6 +526,104 @@ h1 em {
   font-weight: 400;
 }
 
+/* --- Credentials --- */
+.credentials {
+  padding: 3rem 0;
+  background: var(--main-bg);
+}
+
+.credentials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .credentials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cred-card {
+  background: #ffffff;
+  border: 1px solid #d0d8e8;
+  border-radius: 0.75rem;
+  padding: 2rem 1.5rem;
+  min-height: 13rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cred-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3rem;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 0 0 2px 2px;
+}
+
+.cred-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cred-card {
+    transition: none;
+  }
+
+  .cred-card:hover {
+    transform: none;
+  }
+}
+
+.cred-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  background: rgba(43, 58, 145, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.cred-icon svg {
+  width: 44px;
+  height: 44px;
+  fill: var(--brand);
+  stroke: var(--brand);
+}
+
+.cred-card h3 {
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  font-weight: 600;
+  color: var(--brand);
+  margin: 0 0 0.75rem;
+  text-wrap: balance;
+  max-width: 32ch;
+  line-height: 1.3;
+}
+
+.cred-card p {
+  font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
+  line-height: 1.5;
+  color: #4a5578;
+  margin: 0;
+  text-wrap: pretty;
+  max-width: 32ch;
+}
+
 /* --- Seções genéricas --- */
 section {
   padding: 3rem 0;
