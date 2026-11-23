@@ -130,7 +130,7 @@ main .eyebrow {
 
 .logo img,
 .logo svg {
-  height: clamp(2.5rem, 5vw, 3.5rem);
+  height: clamp(3rem, 6vw, 4.5rem);
   width: auto;
   flex-shrink: 0;
 }

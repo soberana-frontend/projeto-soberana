@@ -12,7 +12,7 @@ export default function Logo({ variant = 'default', className = '' }: LogoProps)
 			alt="Soberana Segurança e Vigilância"
 			className={className}
 			style={{
-				height: 'clamp(2.5rem, 5vw, 3.5rem)',
+				height: 'clamp(3rem, 6vw, 4.5rem)',
 				width: 'auto',
 			}}
 		/>
