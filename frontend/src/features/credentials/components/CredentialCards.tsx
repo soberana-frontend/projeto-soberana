@@ -1,13 +1,19 @@
+'use client';
+
+import { useState, useRef, useCallback } from 'react';
+
 interface CredentialItem {
 	title: string;
 	description: string;
 	icon: React.ReactNode;
+	details?: string[];
 }
 
 const CREDENTIALS: CredentialItem[] = [
 	{
 		title: 'Autorizada pela Polícia Federal',
 		description: 'Atuação regulamentada em segurança privada.',
+		details: ['[TEXTO DE EXEMPLO - SUBSTITUIR]'],
 		icon: (
 			<path d="M12 2l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V5l7-3zm-1 11l-3-3 1.4-1.4L11 14.2l5.6-5.6L18 10l-7 7z" />
 		),
@@ -71,19 +77,95 @@ const CREDENTIALS: CredentialItem[] = [
 ];
 
 export default function CredentialCards() {
+	const [openIndex, setOpenIndex] = useState<number | null>(null);
+	const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+	const toggle = useCallback((index: number) => {
+		setOpenIndex((prev) => {
+			const next = prev === index ? null : index;
+			if (next !== null) {
+				requestAnimationFrame(() => {
+					const el = cardRefs.current[next];
+					if (el) {
+						el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+					}
+				});
+			}
+			return next;
+		});
+	}, []);
+
+	const handleKeyDown = useCallback(
+		(e: React.KeyboardEvent, index: number) => {
+			if (e.key === 'Enter' || e.key === ' ') {
+				e.preventDefault();
+				toggle(index);
+			}
+		},
+		[toggle],
+	);
+
 	return (
 		<section className="credentials" aria-label="Credenciais">
 			<div className="w">
 				<div className="credentials-grid">
-					{CREDENTIALS.map((item) => (
-						<div key={item.title} className="cred-card">
-							<div className="cred-icon" aria-hidden="true">
-								<svg viewBox="0 0 24 24">{item.icon}</svg>
+					{CREDENTIALS.map((item, index) => {
+						const hasDetails = !!item.details && item.details.length > 0;
+						const isOpen = openIndex === index;
+						const detailsId = `cred-details-${index}`;
+
+						if (!hasDetails) {
+							return (
+								<div key={item.title} className="cred-card">
+									<div className="cred-icon" aria-hidden="true">
+										<svg viewBox="0 0 24 24">{item.icon}</svg>
+									</div>
+									<h3>{item.title}</h3>
+									<p>{item.description}</p>
+								</div>
+							);
+						}
+
+						return (
+							<div
+								key={item.title}
+								ref={(el) => { cardRefs.current[index] = el; }}
+								className={`cred-card cred-card--expandable${isOpen ? ' cred-card--open' : ''}`}
+								role="button"
+								tabIndex={0}
+								aria-expanded={isOpen}
+								aria-controls={detailsId}
+								onClick={() => toggle(index)}
+								onKeyDown={(e) => handleKeyDown(e, index)}
+								style={{ scrollMarginTop: 'calc(var(--header-h) + 1rem)' }}
+							>
+								<div className="cred-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">{item.icon}</svg>
+								</div>
+								<h3>{item.title}</h3>
+								<p>{item.description}</p>
+
+								<div className="cred-toggle" aria-hidden="true">
+									<span>{isOpen ? 'Mostrar menos' : 'Saiba mais'}</span>
+									<svg className={`cred-chevron${isOpen ? ' cred-chevron--open' : ''}`} viewBox="0 0 24 24" width="16" height="16">
+										<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+									</svg>
+								</div>
+
+								<div className="cred-details-wrapper" id={detailsId} role="region" aria-hidden={!isOpen}>
+									<div className="cred-details-inner">
+										<hr className="cred-divider" />
+										{item.details!.map((paragraph, pIdx) => (
+											<p key={pIdx}>{paragraph}</p>
+										))}
+										<a className="btn cred-cta" href="/orcamento">
+											Solicitar orçamento
+										</a>
+									</div>
+								</div>
 							</div>
-							<h3>{item.title}</h3>
-							<p>{item.description}</p>
-						</div>
-					))}
+						);
+					})}
 				</div>
 			</div>
 		</section>
