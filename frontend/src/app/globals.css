@@ -294,7 +294,7 @@ nav .btn {
 .hero {
   color: #fff;
   margin-top: calc(-1 * var(--header-h));
-  padding: calc(var(--header-h) + 4rem) 0 7rem;
+  padding: 0 0 7rem;
   position: relative;
   overflow: visible;
   min-height: min(100svh, 56rem);
@@ -336,7 +336,7 @@ nav .btn {
   align-items: center;
   position: relative;
   z-index: 1;
-  padding-top: calc(var(--header-h) + 2rem);
+  padding-top: calc(var(--header-h) + 5rem);
   padding-inline: max(1rem, calc((100% - 1200px) / 2 + 1rem));
 }
 
