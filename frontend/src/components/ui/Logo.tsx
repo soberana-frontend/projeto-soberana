@@ -10,11 +10,7 @@ export default function Logo({ variant = 'default', className = '' }: LogoProps)
 		<img
 			src={soberanaLogo.src || soberanaLogo}
 			alt="Soberana Segurança e Vigilância"
-			className={className}
-			style={{
-				height: 'clamp(3rem, 7vw, 5.5rem)',
-				width: 'auto',
-			}}
+			className={`logo-img ${className}`.trim()}
 		/>
 	);
 }

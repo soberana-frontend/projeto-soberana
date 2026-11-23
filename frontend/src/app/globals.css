@@ -47,9 +47,19 @@
 /* --- Reset e base --- */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 4rem;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
+  scroll-padding-top: 80px;
+}
+
+@media (min-width: 640px) {
+  html { scroll-padding-top: 104px; }
+}
+
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: 128px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
 }
 
 *, *::before, *::after {
@@ -115,24 +125,31 @@ main .eyebrow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 5.75rem;
-  padding: 0 clamp(1rem, 4vw, 3rem);
+  height: 72px;
+  padding: 0 24px;
   width: 100%;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  line-height: 1.1;
   min-width: 0;
 }
 
-.logo img,
-.logo svg {
-  height: clamp(3rem, 6vw, 4.5rem);
+.logo-img {
+  height: 60px;
   width: auto;
   flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .hd { height: 96px; }
+  .logo-img { height: 84px; }
+}
+
+@media (min-width: 1024px) {
+  .hd { height: 120px; }
+  .logo-img { height: 108px; }
 }
 
 .burger {
