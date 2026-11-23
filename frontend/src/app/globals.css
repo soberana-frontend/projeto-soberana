@@ -294,7 +294,7 @@ nav .btn {
 .hero {
   color: #fff;
   margin-top: calc(-1 * var(--header-h));
-  padding: calc(var(--header-h) + 2rem) 0 7rem;
+  padding: calc(var(--header-h) + 4rem) 0 7rem;
   position: relative;
   overflow: visible;
   min-height: min(100svh, 56rem);
