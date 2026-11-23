@@ -6,9 +6,6 @@ interface LogoProps {
 }
 
 export default function Logo({ variant = 'default', className = '' }: LogoProps) {
-	const isLight = variant === 'light';
-	const textColor = isLight ? '#1B2341' : '#ffffff';
-
 	return (
 		<img
 			src={soberanaLogo.src || soberanaLogo}
@@ -17,7 +14,6 @@ export default function Logo({ variant = 'default', className = '' }: LogoProps)
 			style={{
 				height: 'clamp(2.5rem, 5vw, 3.5rem)',
 				width: 'auto',
-				color: textColor,
 			}}
 		/>
 	);
