@@ -299,12 +299,27 @@ nav .btn {
 /* --- Hero Section --- */
 .hero {
   color: #fff;
-  padding: 3rem 0 7rem;
+  padding: calc(3rem + 72px) 0 7rem;
+  margin-top: -72px;
   position: relative;
   overflow: visible;
   min-height: 500px;
   display: flex;
   align-items: center;
+}
+
+@media (min-width: 640px) {
+  .hero {
+    margin-top: -96px;
+    padding-top: calc(3rem + 96px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    margin-top: -120px;
+    padding-top: calc(3rem + 120px);
+  }
 }
 
 .hero-video {
