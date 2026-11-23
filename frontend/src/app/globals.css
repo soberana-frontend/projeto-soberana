@@ -637,7 +637,7 @@ h1 em {
 
 .cred-card--open {
   border-color: var(--brand);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 10;
 }
 
 .cred-card--open::before {
@@ -658,50 +658,59 @@ h1 em {
 }
 
 .cred-chevron {
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .cred-chevron--open {
   transform: rotate(180deg);
 }
 
-.cred-details-wrapper {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease;
-}
-
-.cred-card--open .cred-details-wrapper {
-  grid-template-rows: 1fr;
-}
-
-.cred-details-inner {
-  overflow: hidden;
+.cred-overlay {
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  right: -1px;
+  background: #ffffff;
+  border: 1px solid var(--brand);
+  border-top: none;
+  border-radius: 0 0 0.75rem 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 20;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
 }
 
-.cred-card--open .cred-details-inner {
+.cred-card--open .cred-overlay {
   opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.cred-overlay-inner {
+  padding: 1.25rem 1.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cred-divider {
   border: none;
   border-top: 1px solid #d0d8e8;
-  margin: 1rem 0;
+  margin: 0 0 1rem;
   width: 60%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-.cred-details-inner p {
+.cred-overlay-inner p {
   font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
   line-height: 1.6;
   color: #4a5578;
   margin: 0 0 0.75rem;
   max-width: 40ch;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .cred-cta {
@@ -709,9 +718,38 @@ h1 em {
   display: inline-flex;
 }
 
+/* Desktop: hover triggers open/close with delay handled in JS */
+@media (hover: hover) and (pointer: fine) {
+  .cred-card--expandable:hover {
+    border-color: var(--brand);
+  }
+}
+
+/* Touch devices: toggle via click, chevron rotates */
+@media (hover: none) {
+  .cred-overlay {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    border: none;
+    border-top: 1px solid #d0d8e8;
+    border-radius: 0;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .cred-card--open .cred-overlay {
+    transform: none;
+  }
+
+  .cred-card--expandable {
+    overflow: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .cred-details-wrapper,
-  .cred-details-inner,
+  .cred-overlay,
   .cred-chevron {
     transition: none;
   }

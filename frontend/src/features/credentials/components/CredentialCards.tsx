@@ -1,19 +1,21 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 interface CredentialItem {
 	title: string;
 	description: string;
 	icon: React.ReactNode;
-	details?: string[];
+	details: string[];
 }
 
 const CREDENTIALS: CredentialItem[] = [
 	{
 		title: 'Autorizada pela Polícia Federal',
 		description: 'Atuação regulamentada em segurança privada.',
-		details: ['[TEXTO DE EXEMPLO - SUBSTITUIR]'],
+		details: [
+			'A segurança privada no Brasil é regulamentada e fiscalizada pela Polícia Federal, que autoriza e acompanha as empresas do setor. A Soberana atua dentro dessas exigências.',
+		],
 		icon: (
 			<path d="M12 2l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V5l7-3zm-1 11l-3-3 1.4-1.4L11 14.2l5.6-5.6L18 10l-7 7z" />
 		),
@@ -21,6 +23,9 @@ const CREDENTIALS: CredentialItem[] = [
 	{
 		title: 'Atuação com organismos internacionais',
 		description: 'Experiência em operações para organismos internacionais.',
+		details: [
+			'Temos experiência em operações para organismos internacionais, que costumam exigir procedimentos bem definidos. Fale com a nossa equipe para conhecer essa experiência.',
+		],
 		icon: (
 			<>
 				<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.5" />
@@ -31,6 +36,9 @@ const CREDENTIALS: CredentialItem[] = [
 	{
 		title: 'Certificações',
 		description: 'Processos e equipe com certificações reconhecidas.',
+		details: [
+			'Nossos processos e nossa equipe contam com certificações reconhecidas. Fale com a nossa equipe para conhecer cada uma delas.',
+		],
 		icon: (
 			<>
 				<circle cx="12" cy="9" r="6" fill="none" stroke="currentColor" strokeWidth="1.5" />
@@ -42,6 +50,9 @@ const CREDENTIALS: CredentialItem[] = [
 	{
 		title: 'Supervisão e relatórios',
 		description: 'Acompanhamento da operação com supervisão e relatório de ocorrências.',
+		details: [
+			'A operação é acompanhada por supervisão, e as ocorrências são registradas em relatório. Assim o cliente tem transparência sobre cada turno e problemas são corrigidos rapidamente.',
+		],
 		icon: (
 			<>
 				<rect x="5" y="2" width="14" height="18" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5" />
@@ -54,6 +65,9 @@ const CREDENTIALS: CredentialItem[] = [
 	{
 		title: 'Equipe identificada e treinada',
 		description: 'Vigilantes uniformizados, identificados e em contato com a central.',
+		details: [
+			'Os vigilantes atuam uniformizados e identificados e mantêm comunicação por rádio com a central. Isso facilita reconhecer a equipe no posto e acionar apoio quando necessário.',
+		],
 		icon: (
 			<>
 				<circle cx="9" cy="7" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" />
@@ -66,6 +80,9 @@ const CREDENTIALS: CredentialItem[] = [
 	{
 		title: 'Plano sob medida',
 		description: 'Cada operação é dimensionada a partir dos riscos do cliente.',
+		details: [
+			'Antes de definir efetivo e postos, avaliamos os riscos do local e da operação do cliente. O plano é dimensionado a partir dessa avaliação, não de um pacote fixo.',
+		],
 		icon: (
 			<>
 				<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.5" />
@@ -79,65 +96,99 @@ const CREDENTIALS: CredentialItem[] = [
 export default function CredentialCards() {
 	const [openIndex, setOpenIndex] = useState<number | null>(null);
 	const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+	const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+	const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-	const toggle = useCallback((index: number) => {
-		setOpenIndex((prev) => {
-			const next = prev === index ? null : index;
-			if (next !== null) {
-				requestAnimationFrame(() => {
-					const el = cardRefs.current[next];
-					if (el) {
-						el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-					}
-				});
-			}
-			return next;
-		});
+	const clearTimers = useCallback(() => {
+		if (openTimerRef.current) {
+			clearTimeout(openTimerRef.current);
+			openTimerRef.current = null;
+		}
+		if (closeTimerRef.current) {
+			clearTimeout(closeTimerRef.current);
+			closeTimerRef.current = null;
+		}
+	}, []);
+
+	const openCard = useCallback((index: number) => {
+		clearTimers();
+		setOpenIndex(index);
+	}, [clearTimers]);
+
+	const closeCard = useCallback(() => {
+		clearTimers();
+		setOpenIndex(null);
+	}, [clearTimers]);
+
+	const handleMouseEnter = useCallback((index: number) => {
+		if (closeTimerRef.current) {
+			clearTimeout(closeTimerRef.current);
+			closeTimerRef.current = null;
+		}
+		openTimerRef.current = setTimeout(() => {
+			setOpenIndex(index);
+		}, 120);
+	}, []);
+
+	const handleMouseLeave = useCallback(() => {
+		if (openTimerRef.current) {
+			clearTimeout(openTimerRef.current);
+			openTimerRef.current = null;
+		}
+		closeTimerRef.current = setTimeout(() => {
+			setOpenIndex(null);
+		}, 150);
 	}, []);
 
 	const handleKeyDown = useCallback(
 		(e: React.KeyboardEvent, index: number) => {
 			if (e.key === 'Enter' || e.key === ' ') {
 				e.preventDefault();
-				toggle(index);
+				setOpenIndex((prev) => (prev === index ? null : index));
+			} else if (e.key === 'Escape') {
+				e.preventDefault();
+				setOpenIndex(null);
 			}
 		},
-		[toggle],
+		[],
 	);
+
+	const handleFocus = useCallback((index: number) => {
+		setOpenIndex(index);
+	}, []);
+
+	const handleBlur = useCallback(() => {
+		closeTimerRef.current = setTimeout(() => {
+			setOpenIndex(null);
+		}, 150);
+	}, []);
+
+	useEffect(() => {
+		return () => clearTimers();
+	}, [clearTimers]);
 
 	return (
 		<section className="credentials" aria-label="Credenciais">
 			<div className="w">
 				<div className="credentials-grid">
 					{CREDENTIALS.map((item, index) => {
-						const hasDetails = !!item.details && item.details.length > 0;
 						const isOpen = openIndex === index;
 						const detailsId = `cred-details-${index}`;
-
-						if (!hasDetails) {
-							return (
-								<div key={item.title} className="cred-card">
-									<div className="cred-icon" aria-hidden="true">
-										<svg viewBox="0 0 24 24">{item.icon}</svg>
-									</div>
-									<h3>{item.title}</h3>
-									<p>{item.description}</p>
-								</div>
-							);
-						}
 
 						return (
 							<div
 								key={item.title}
 								ref={(el) => { cardRefs.current[index] = el; }}
 								className={`cred-card cred-card--expandable${isOpen ? ' cred-card--open' : ''}`}
-								role="button"
 								tabIndex={0}
+								role="button"
 								aria-expanded={isOpen}
 								aria-controls={detailsId}
-								onClick={() => toggle(index)}
+								onMouseEnter={() => handleMouseEnter(index)}
+								onMouseLeave={handleMouseLeave}
+								onFocus={() => handleFocus(index)}
+								onBlur={handleBlur}
 								onKeyDown={(e) => handleKeyDown(e, index)}
-								style={{ scrollMarginTop: 'calc(var(--header-h) + 1rem)' }}
 							>
 								<div className="cred-icon" aria-hidden="true">
 									<svg viewBox="0 0 24 24">{item.icon}</svg>
@@ -152,10 +203,10 @@ export default function CredentialCards() {
 									</svg>
 								</div>
 
-								<div className="cred-details-wrapper" id={detailsId} role="region" aria-hidden={!isOpen}>
-									<div className="cred-details-inner">
+								<div className="cred-overlay" id={detailsId} role="region" aria-hidden={!isOpen}>
+									<div className="cred-overlay-inner">
 										<hr className="cred-divider" />
-										{item.details!.map((paragraph, pIdx) => (
+										{item.details.map((paragraph, pIdx) => (
 											<p key={pIdx}>{paragraph}</p>
 										))}
 										<a className="btn cred-cta" href="/orcamento">
