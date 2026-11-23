@@ -1230,7 +1230,7 @@ footer {
   }
 
   .hero {
-    padding: 4.5rem 0 7.5rem;
+    padding: 0 0 clamp(2rem, 5vw, 4rem);
   }
 
   .hero .w {
