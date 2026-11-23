@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Logo from './Logo';
 
 interface NavItem {
@@ -24,6 +24,13 @@ const INSTITUTIONAL_LINKS: NavItem[] = [
 
 export default function Header() {
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
+
+	useEffect(() => {
+		const onScroll = () => setScrolled(window.scrollY > 50);
+		window.addEventListener('scroll', onScroll, { passive: true });
+		return () => window.removeEventListener('scroll', onScroll);
+	}, []);
 
 	const toggleMenu = () => setMenuOpen((prev) => !prev);
 
@@ -35,7 +42,7 @@ export default function Header() {
 	};
 
 	return (
-		<header className="hd">
+		<header className={`hd${scrolled ? ' scrolled' : ''}`}>
 			<a className="logo" href="/" aria-label="Soberana – início">
 				<Logo />
 			</a>
