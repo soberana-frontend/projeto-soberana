@@ -336,7 +336,7 @@ nav .btn {
   align-items: center;
   position: relative;
   z-index: 1;
-  padding-top: calc(var(--header-h) + clamp(1rem, 3.5vw, 2.5rem));
+  padding-top: calc(var(--header-h) + clamp(0.5rem, 2.5vw, 1.5rem));
   padding-inline: max(1rem, calc((100% - 1200px) / 2 + 1rem));
 }
 
