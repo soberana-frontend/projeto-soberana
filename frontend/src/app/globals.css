@@ -294,12 +294,12 @@ nav .btn {
 .hero {
   color: #fff;
   margin-top: calc(-1 * var(--header-h));
-  padding: 0 0 7rem;
+  padding: 0 0 clamp(2rem, 5vw, 4rem);
   position: relative;
   overflow: visible;
-  min-height: min(100svh, 56rem);
+  min-height: clamp(30rem, 75svh, 44rem);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .hero-video {
@@ -336,7 +336,7 @@ nav .btn {
   align-items: center;
   position: relative;
   z-index: 1;
-  padding-top: calc(var(--header-h) + 5rem);
+  padding-top: calc(var(--header-h) + clamp(1.5rem, 4vw, 3rem));
   padding-inline: max(1rem, calc((100% - 1200px) / 2 + 1rem));
 }
 
