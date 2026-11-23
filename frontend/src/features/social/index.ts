@@ -1,0 +1,1 @@
+export { default as SocialAction } from './components/SocialAction';
