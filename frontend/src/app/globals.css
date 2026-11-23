@@ -299,7 +299,7 @@ nav .btn {
   overflow: visible;
   min-height: min(100svh, 56rem);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .hero-video {
@@ -336,6 +336,7 @@ nav .btn {
   align-items: center;
   position: relative;
   z-index: 1;
+  padding-top: calc(var(--header-h) + 2rem);
   padding-inline: max(1rem, calc((100% - 1200px) / 2 + 1rem));
 }
 
