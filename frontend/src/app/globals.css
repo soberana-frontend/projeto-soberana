@@ -5,6 +5,11 @@
    ============================================ */
 
 /* --- Variáveis e tema --- */
+/* --- Altura do header (igual nos dois temas, responsiva por breakpoint) --- */
+:root {
+  --header-h: 72px;
+}
+
 :root,
 :root[data-theme="light"] {
   /* Cores imutáveis (header, hero, footer — não mudam entre temas) */
@@ -15,7 +20,6 @@
   --gold: #FFD215;
   --sky: #0094d9;
   --acc: #5cc8ff;
-  --header-h: 72px;
 
   /* Cores que trocam entre temas (tema claro = padrão atual) */
   --main-bg: #F4F6FA;
@@ -133,7 +137,7 @@ main .eyebrow {
 
 /* --- Header --- */
 .hd {
-  background: rgba(27, 35, 65, 0.3);
+  background: rgba(27, 35, 65, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   color: #fff;
@@ -170,7 +174,7 @@ main .eyebrow {
 }
 
 .hd.scrolled {
-  background: rgba(27, 35, 65, 0.85);
+  background: var(--bg);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
