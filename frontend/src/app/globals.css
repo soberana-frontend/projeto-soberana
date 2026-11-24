@@ -150,6 +150,25 @@ main .eyebrow {
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* CTA desktop: oculto em mobile/tablet */
+.hd-cta-desktop {
+  display: none;
+}
+
+/* Divisor entre CTA e theme toggle */
+.hd-divider {
+  display: none;
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+}
+
+/* CTA dentro do nav mobile */
+.nav-cta-mobile {
+  display: block;
+}
+
 .hd.scrolled {
   background: rgba(27, 35, 65, 0.85);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
@@ -1589,11 +1608,7 @@ footer {
     align-items: center;
   }
 
-  /* Nav inline, sem hambúrguer */
-  .burger {
-    display: none;
-  }
-
+  /* Nav inline em tablet (sem grid 3 colunas ainda) */
   nav {
     display: block;
     position: static;
@@ -1670,6 +1685,46 @@ footer {
 
   .fg {
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  }
+}
+
+/* 4b. Desktop (a partir de 1024px) — Header em grid de 3 colunas */
+@media (min-width: 1024px) {
+  .hd {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+
+  .logo {
+    justify-self: start;
+  }
+
+  nav {
+    justify-self: center;
+  }
+
+  .hd-actions {
+    justify-self: end;
+  }
+
+  /* Esconder burger no desktop */
+  .burger {
+    display: none;
+  }
+
+  /* Mostrar CTA desktop e divisor */
+  .hd-cta-desktop {
+    display: inline-flex;
+  }
+
+  .hd-divider {
+    display: block;
+  }
+
+  /* Esconder CTA dentro do nav no desktop */
+  .nav-cta-mobile {
+    display: none;
   }
 }
 

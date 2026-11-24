@@ -64,7 +64,38 @@ export default function Header() {
 				<Logo />
 			</a>
 
+			<nav id="nav" className={menuOpen ? 'open' : ''} onClick={handleNavClick}>
+				<ul>
+					{NAV_ITEMS.map((item) => (
+						<li key={item.href}>
+							<a href={item.href}>{item.label}</a>
+						</li>
+					))}
+					<li>
+						<details>
+							<summary>Institucional</summary>
+							<div className="sub">
+								{INSTITUTIONAL_LINKS.map((link) => (
+									<a key={link.href} href={link.href}>
+										{link.label}
+									</a>
+								))}
+							</div>
+						</details>
+					</li>
+					<li className="nav-cta-mobile">
+						<a className="btn" href="/orcamento">
+							Solicitar orçamento
+						</a>
+					</li>
+				</ul>
+			</nav>
+
 			<div className="hd-actions">
+				<a className="btn hd-cta-desktop" href="/orcamento">
+					Solicitar orçamento
+				</a>
+				<span className="hd-divider" aria-hidden="true" />
 				<button
 					className="theme-toggle"
 					onClick={toggleTheme}
@@ -94,33 +125,6 @@ export default function Header() {
 					☰
 				</button>
 			</div>
-
-			<nav id="nav" className={menuOpen ? 'open' : ''} onClick={handleNavClick}>
-				<ul>
-					{NAV_ITEMS.map((item) => (
-						<li key={item.href}>
-							<a href={item.href}>{item.label}</a>
-						</li>
-					))}
-					<li>
-						<details>
-							<summary>Institucional</summary>
-							<div className="sub">
-								{INSTITUTIONAL_LINKS.map((link) => (
-									<a key={link.href} href={link.href}>
-										{link.label}
-									</a>
-								))}
-							</div>
-						</details>
-					</li>
-					<li>
-						<a className="btn" href="/orcamento">
-							Solicitar orçamento
-						</a>
-					</li>
-				</ul>
-			</nav>
 		</header>
 	);
 }
