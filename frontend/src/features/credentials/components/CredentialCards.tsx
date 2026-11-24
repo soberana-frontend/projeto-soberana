@@ -198,6 +198,23 @@ export default function CredentialCards() {
 		return () => window.removeEventListener('keydown', onKeyDown);
 	});
 
+	// Fecha o painel ao rolar para fora da seção de credenciais
+	useEffect(() => {
+		if (activeIndex === null) return;
+		const onScroll = () => {
+			const section = sectionRef.current;
+			if (!section) return;
+			const rect = section.getBoundingClientRect();
+			// Se a seção saiu completamente da viewport (para cima ou para baixo)
+			if (rect.bottom < 0 || rect.top > window.innerHeight) {
+				setActiveIndex(null);
+				history.pushState('', document.title, window.location.pathname + window.location.search);
+			}
+		};
+		window.addEventListener('scroll', onScroll, { passive: true });
+		return () => window.removeEventListener('scroll', onScroll);
+	}, [activeIndex]);
+
 	const openPanel = useCallback((index: number) => {
 		setActiveIndex(index);
 		window.location.hash = `credenciais-${CREDENTIALS[index].slug}`;
