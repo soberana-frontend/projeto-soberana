@@ -539,6 +539,8 @@ h1 em {
   grid-template-columns: 1fr;
   gap: 1.5rem;
   align-items: start;
+  position: relative;
+  z-index: 2;
 }
 
 @media (min-width: 900px) {
