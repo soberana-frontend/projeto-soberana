@@ -528,8 +528,12 @@ h1 em {
 
 /* --- Credentials --- */
 .credentials {
-  padding: 3rem 0;
-  background: var(--main-bg);
+  padding: clamp(2.5rem, 6vw, 5rem) 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--brand) 8%, white) 0%,
+    color-mix(in srgb, var(--brand) 4%, white) 100%
+  );
   position: relative;
   z-index: 5;
 }
@@ -604,7 +608,7 @@ h1 em {
   width: 72px;
   height: 72px;
   border-radius: 12px;
-  background: rgba(43, 58, 145, 0.08);
+  background: color-mix(in srgb, var(--brand) 16%, white);
   display: flex;
   align-items: center;
   justify-content: center;
