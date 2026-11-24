@@ -5,43 +5,57 @@
    ============================================ */
 
 /* --- Variáveis e tema --- */
-:root {
+:root,
+:root[data-theme="light"] {
+  /* Cores imutáveis (header, hero, footer — não mudam entre temas) */
   --bg: #1a2345;
-  --main-bg: #F4F6FA;
   --surf: #243060;
-  --tx: #eef1fa;
-  --mut: #b8c3e5;
-  --line: #3a4580;
   --brand: #2b3a91;
   --brand2: #1c2563;
   --gold: #FFD215;
   --sky: #0094d9;
   --acc: #5cc8ff;
   --header-h: 72px;
-  color-scheme: dark;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #1a2345;
-    --main-bg: #F4F6FA;
-    --surf: #243060;
-    --tx: #eef1fa;
-    --mut: #b8c3e5;
-    --line: #3a4580;
-    --acc: #5cc8ff;
-    color-scheme: dark;
-  }
+  /* Cores que trocam entre temas (tema claro = padrão atual) */
+  --main-bg: #F4F6FA;
+  --card-bg: #ffffff;
+  --card-border: #d0d8e8;
+  --card-hover-bg: #f0f4fa;
+  --heading: #1a2345;
+  --body: #4a5578;
+  --muted: #8892b0;
+  --link: #2b3a91;
+  --line-light: #d0d8e8;
+  --icon-box: rgba(43, 58, 145, 0.08);
+  --alt-bg: #dde3f0;
+  --focus-ring: rgba(43, 58, 145, 0.4);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --cred-intro: #4a5578;
+  --timeline-line: #d0d8e8;
+  --doc-placeholder: #b8c3e5;
+  color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --bg: #1a2345;
-  --main-bg: #F4F6FA;
-  --surf: #243060;
-  --tx: #eef1fa;
-  --mut: #b8c3e5;
-  --line: #3a4580;
-  --acc: #5cc8ff;
+  --main-bg: #0f1628;
+  --card-bg: #1a2345;
+  --card-border: #2d3a60;
+  --card-hover-bg: #243060;
+  --heading: #eef1fa;
+  --body: #b8c3e5;
+  --muted: #8892b0;
+  --link: #5cc8ff;
+  --line-light: #2d3a60;
+  --icon-box: rgba(92, 200, 255, 0.12);
+  --alt-bg: #162040;
+  --focus-ring: rgba(92, 200, 255, 0.4);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.2);
+  --cred-intro: #b8c3e5;
+  --timeline-line: #2d3a60;
+  --doc-placeholder: #3a4580;
   color-scheme: dark;
 }
 
@@ -93,22 +107,22 @@ img, svg, video {
   display: block;
 }
 
-/* --- Main com fundo claro --- */
+/* --- Main com fundo temático --- */
 main {
   background: var(--main-bg);
-  color: #1a2345;
+  color: var(--body);
 }
 
 main h2 {
-  color: #1a2345;
+  color: var(--heading);
 }
 
 main .sub2 {
-  color: #4a5578;
+  color: var(--body);
 }
 
 main .eyebrow {
-  color: #2b3a91;
+  color: var(--link);
 }
 
 /* --- Layout container --- */
@@ -153,6 +167,13 @@ main .eyebrow {
   flex-shrink: 0;
 }
 
+.hd-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
 .burger {
   background: none;
   border: 1px solid #5a6bc0;
@@ -164,6 +185,47 @@ main .eyebrow {
   flex-shrink: 0;
   min-height: 44px;
   min-width: 44px;
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Transição de tema (respeita prefers-reduced-motion) --- */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-theme] main,
+  html[data-theme] main *,
+  html[data-theme] .credentials,
+  html[data-theme] .credentials * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
 }
 
 /* --- Nav mobile --- */
@@ -458,8 +520,8 @@ h1 em {
 }
 
 .stat-card {
-  background: #ffffff;
-  border: 1px solid #d0d8e8;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 0.75rem;
   padding: 1.5rem 1.25rem;
   text-align: center;
@@ -468,8 +530,8 @@ h1 em {
 }
 
 .stat-card:hover {
-  background: #f0f4fa;
-  border-color: #2b3a91;
+  background: var(--card-hover-bg);
+  border-color: var(--link);
 }
 
 @media (min-width: 640px) {
@@ -480,7 +542,7 @@ h1 em {
 
   .stat-card {
     border-radius: 0;
-    border-right: 1px solid #d0d8e8;
+    border-right: 1px solid var(--card-border);
     text-align: left;
     padding: 2rem 1.75rem;
   }
@@ -512,7 +574,7 @@ h1 em {
   display: block;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 800;
-  color: #2b3a91;
+  color: var(--link);
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin-bottom: 0.35rem;
@@ -520,7 +582,7 @@ h1 em {
 
 .stats span {
   display: block;
-  color: #4a5578;
+  color: var(--body);
   font-size: clamp(0.8rem, 1.8vw, 0.9rem);
   line-height: 1.4;
   font-weight: 400;
@@ -550,8 +612,8 @@ h1 em {
 }
 
 .cred-card {
-  background: #ffffff;
-  border: 1px solid #d0d8e8;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 0.75rem;
   padding: 2rem 1.5rem;
   min-height: 13rem;
@@ -604,7 +666,7 @@ h1 em {
   width: 72px;
   height: 72px;
   border-radius: 12px;
-  background: rgba(43, 58, 145, 0.08);
+  background: var(--icon-box);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -632,7 +694,7 @@ h1 em {
 .cred-card p {
   font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
   line-height: 1.5;
-  color: #4a5578;
+  color: var(--body);
   margin: 0;
   text-wrap: pretty;
   max-width: 32ch;
@@ -643,13 +705,13 @@ h1 em {
   cursor: pointer;
   outline: none;
   border: none;
-  background: #ffffff;
+  background: var(--card-bg);
   font-family: inherit;
   width: 100%;
 }
 
 .cred-card--clickable:focus-visible {
-  box-shadow: 0 0 0 3px rgba(43, 58, 145, 0.4);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 .cred-card-link {
@@ -686,8 +748,8 @@ h1 em {
 
 /* --- Credential detail panel --- */
 .cred-panel {
-  background: #ffffff;
-  border: 1px solid #d0d8e8;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 0.75rem;
   padding: 2rem 1.5rem;
   min-height: 20rem;
@@ -738,7 +800,7 @@ h1 em {
   gap: 1rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #d0d8e8;
+  border-bottom: 1px solid var(--line-light);
 }
 
 .cred-panel-header h2 {
@@ -756,7 +818,7 @@ h1 em {
 .cred-panel-intro {
   font-size: clamp(1rem, 1.5vw, 1.125rem);
   line-height: 1.7;
-  color: #4a5578;
+  color: var(--cred-intro);
   margin: 0 0 1.5rem;
   max-width: 70ch;
 }
@@ -765,7 +827,7 @@ h1 em {
 .cred-timeline {
   margin: 1.5rem 0;
   padding-left: 1.5rem;
-  border-left: 2px solid #d0d8e8;
+  border-left: 2px solid var(--timeline-line);
 }
 
 .cred-timeline-item {
@@ -785,7 +847,7 @@ h1 em {
   height: 12px;
   border-radius: 50%;
   background: var(--gold);
-  border: 2px solid #ffffff;
+  border: 2px solid var(--card-bg);
 }
 
 .cred-timeline-year {
@@ -799,7 +861,7 @@ h1 em {
 .cred-timeline-item p {
   font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
   line-height: 1.6;
-  color: #4a5578;
+  color: var(--body);
   margin: 0;
 }
 
@@ -818,8 +880,8 @@ h1 em {
 }
 
 .cred-item-card {
-  background: var(--main-bg);
-  border: 1px solid #d0d8e8;
+  background: var(--alt-bg);
+  border: 1px solid var(--card-border);
   border-radius: 0.5rem;
   padding: 1.25rem;
 }
@@ -827,14 +889,14 @@ h1 em {
 .cred-item-card h4 {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--brand);
+  color: var(--heading);
   margin: 0 0 0.5rem;
 }
 
 .cred-item-card p {
   font-size: 0.9375rem;
   line-height: 1.5;
-  color: #4a5578;
+  color: var(--body);
   margin: 0;
 }
 
@@ -857,7 +919,7 @@ h1 em {
   height: 90px;
   object-fit: cover;
   border-radius: 0.5rem;
-  border: 1px solid #d0d8e8;
+  border: 1px solid var(--card-border);
 }
 
 .cred-doc-placeholder {
@@ -866,16 +928,16 @@ h1 em {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--main-bg);
-  border: 1px dashed #d0d8e8;
+  background: var(--alt-bg);
+  border: 1px dashed var(--card-border);
   border-radius: 0.5rem;
   font-size: 2rem;
-  color: #b8c3e5;
+  color: var(--doc-placeholder);
 }
 
 .cred-doc-figure figcaption {
   font-size: 0.8125rem;
-  color: #4a5578;
+  color: var(--body);
   margin-top: 0.35rem;
   line-height: 1.3;
 }
@@ -884,7 +946,7 @@ h1 em {
 .cred-panel-note {
   font-size: 0.9375rem;
   line-height: 1.6;
-  color: #4a5578;
+  color: var(--body);
   font-style: italic;
   margin: 1rem 0;
   padding-left: 1rem;
@@ -900,7 +962,7 @@ h1 em {
   gap: 1rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #d0d8e8;
+  border-top: 1px solid var(--line-light);
 }
 
 .cred-panel-nav {
@@ -910,20 +972,20 @@ h1 em {
 
 .cred-panel-nav button {
   background: none;
-  border: 1px solid #d0d8e8;
+  border: 1px solid var(--card-border);
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   font-family: inherit;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--brand);
+  color: var(--link);
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .cred-panel-nav button:hover {
-  background: var(--main-bg);
-  border-color: var(--brand);
+  background: var(--alt-bg);
+  border-color: var(--link);
 }
 
 .cred-panel-nav button:focus-visible {
@@ -1081,7 +1143,7 @@ h2 {
 
 .carousel-hint {
   text-align: center;
-  color: #4a5578;
+  color: var(--body);
   font-size: 0.8rem;
   margin-top: 0.6rem;
   display: none;
@@ -1230,7 +1292,7 @@ h2 {
 }
 
 .alt {
-  background: #dde3f0;
+  background: var(--alt-bg);
 }
 
 /* --- Notícias (cards escuros sobre fundo claro) --- */
@@ -1247,12 +1309,12 @@ h2 {
 }
 
 .nw .im {
-  background: #243060;
+  background: var(--surf);
   aspect-ratio: 16/9;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #8892b0;
+  color: var(--muted);
   font-size: 0.8rem;
 }
 
@@ -1262,7 +1324,7 @@ h2 {
 
 .nw time {
   font-size: 0.75rem;
-  color: #8892b0;
+  color: var(--muted);
 }
 
 .nw h3 {
@@ -1313,7 +1375,7 @@ h2 {
 }
 
 .band p {
-  color: #d6dcf5;
+  color: #d6dcf5; /* sempre escuro — não muda entre temas */
   max-width: 37.5rem;
   margin: 0 auto 1.5rem;
 }
@@ -1438,23 +1500,23 @@ footer {
 }
 
 .pp {
-  background: #ffffff;
-  border: 1px solid #d0d8e8;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 0.75rem;
   padding: 1.5rem;
   text-align: center;
 }
 
 .pp h3 {
-  color: #1a2345;
+  color: var(--heading);
 }
 
 .pp p {
-  color: #4a5578;
+  color: var(--body);
 }
 
 .pp a {
-  color: #2b3a91;
+  color: var(--link);
 }
 
 .av {
