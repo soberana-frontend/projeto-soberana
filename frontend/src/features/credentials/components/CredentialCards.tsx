@@ -2,30 +2,61 @@
 
 import { useState, useRef, useCallback, useEffect } from 'react';
 
+interface TimelineItem {
+	year: string;
+	text: string;
+}
+
+interface DetailItem {
+	title: string;
+	text: string;
+}
+
+interface DocumentItem {
+	label: string;
+	src: string;
+	alt: string;
+}
+
+interface CredentialDetails {
+	intro?: string;
+	timeline?: TimelineItem[];
+	items?: DetailItem[];
+	documents?: DocumentItem[];
+	note?: string;
+	cta?: { label: string; href: string };
+}
+
 interface CredentialItem {
+	slug: string;
 	title: string;
 	description: string;
 	icon: React.ReactNode;
-	details: string[];
+	details: CredentialDetails;
 }
 
 const CREDENTIALS: CredentialItem[] = [
 	{
+		slug: 'autorizada-policia-federal',
 		title: 'Autorizada pela Polícia Federal',
 		description: 'Atuação regulamentada em segurança privada.',
-		details: [
-			'A segurança privada no Brasil é regulamentada e fiscalizada pela Polícia Federal, que autoriza e acompanha as empresas do setor. A Soberana atua dentro dessas exigências.',
-		],
+		details: {
+			intro:
+				'A segurança privada no Brasil é regulamentada e fiscalizada pela Polícia Federal, que autoriza e acompanha as empresas do setor. A Soberana atua dentro dessas exigências.',
+			timeline: [{ year: '', text: '[TEXTO DE EXEMPLO - SUBSTITUIR]' }],
+		},
 		icon: (
 			<path d="M12 2l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V5l7-3zm-1 11l-3-3 1.4-1.4L11 14.2l5.6-5.6L18 10l-7 7z" />
 		),
 	},
 	{
+		slug: 'atuacao-organismos-internacionais',
 		title: 'Atuação com organismos internacionais',
 		description: 'Experiência em operações para organismos internacionais.',
-		details: [
-			'Temos experiência em operações para organismos internacionais, que costumam exigir procedimentos bem definidos. Fale com a nossa equipe para conhecer essa experiência.',
-		],
+		details: {
+			intro:
+				'Temos experiência em operações para organismos internacionais, que costumam exigir procedimentos bem definidos. Fale com a nossa equipe para conhecer essa experiência.',
+		},
 		icon: (
 			<>
 				<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.5" />
@@ -34,11 +65,16 @@ const CREDENTIALS: CredentialItem[] = [
 		),
 	},
 	{
+		slug: 'certificacoes',
 		title: 'Certificações',
 		description: 'Processos e equipe com certificações reconhecidas.',
-		details: [
-			'Nossos processos e nossa equipe contam com certificações reconhecidas. Fale com a nossa equipe para conhecer cada uma delas.',
-		],
+		details: {
+			intro:
+				'Nossos processos e nossa equipe contam com certificações reconhecidas. Fale com a nossa equipe para conhecer cada uma delas.',
+			documents: [
+				{ label: '[TEXTO DE EXEMPLO - SUBSTITUIR]', src: '', alt: 'Placeholder de documento' },
+			],
+		},
 		icon: (
 			<>
 				<circle cx="12" cy="9" r="6" fill="none" stroke="currentColor" strokeWidth="1.5" />
@@ -48,11 +84,13 @@ const CREDENTIALS: CredentialItem[] = [
 		),
 	},
 	{
+		slug: 'supervisao-relatorios',
 		title: 'Supervisão e relatórios',
 		description: 'Acompanhamento da operação com supervisão e relatório de ocorrências.',
-		details: [
-			'A operação é acompanhada por supervisão, e as ocorrências são registradas em relatório. Assim o cliente tem transparência sobre cada turno e problemas são corrigidos rapidamente.',
-		],
+		details: {
+			intro:
+				'A operação é acompanhada por supervisão, e as ocorrências são registradas em relatório. Assim o cliente tem transparência sobre cada turno e problemas são corrigidos rapidamente.',
+		},
 		icon: (
 			<>
 				<rect x="5" y="2" width="14" height="18" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5" />
@@ -63,11 +101,13 @@ const CREDENTIALS: CredentialItem[] = [
 		),
 	},
 	{
+		slug: 'equipe-identificada-treinada',
 		title: 'Equipe identificada e treinada',
 		description: 'Vigilantes uniformizados, identificados e em contato com a central.',
-		details: [
-			'Os vigilantes atuam uniformizados e identificados e mantêm comunicação por rádio com a central. Isso facilita reconhecer a equipe no posto e acionar apoio quando necessário.',
-		],
+		details: {
+			intro:
+				'Os vigilantes atuam uniformizados e identificados e mantêm comunicação por rádio com a central. Isso facilita reconhecer a equipe no posto e acionar apoio quando necessário.',
+		},
 		icon: (
 			<>
 				<circle cx="9" cy="7" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" />
@@ -78,11 +118,13 @@ const CREDENTIALS: CredentialItem[] = [
 		),
 	},
 	{
+		slug: 'plano-sob-medida',
 		title: 'Plano sob medida',
 		description: 'Cada operação é dimensionada a partir dos riscos do cliente.',
-		details: [
-			'Antes de definir efetivo e postos, avaliamos os riscos do local e da operação do cliente. O plano é dimensionado a partir dessa avaliação, não de um pacote fixo.',
-		],
+		details: {
+			intro:
+				'Antes de definir efetivo e postos, avaliamos os riscos do local e da operação do cliente. O plano é dimensionado a partir dessa avaliação, não de um pacote fixo.',
+		},
 		icon: (
 			<>
 				<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.5" />
@@ -93,130 +135,222 @@ const CREDENTIALS: CredentialItem[] = [
 	},
 ];
 
+function getSlugFromHash(): string | null {
+	if (typeof window === 'undefined') return null;
+	const hash = window.location.hash.replace('#', '');
+	if (hash.startsWith('credenciais-')) {
+		return hash.replace('credenciais-', '');
+	}
+	return null;
+}
+
 export default function CredentialCards() {
-	const [openIndex, setOpenIndex] = useState<number | null>(null);
-	const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-	const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-	const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+	const [activeIndex, setActiveIndex] = useState<number | null>(null);
+	const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
+	const panelTitleRef = useRef<HTMLHeadingElement>(null);
+	const sectionRef = useRef<HTMLElement>(null);
 
-	const clearTimers = useCallback(() => {
-		if (openTimerRef.current) {
-			clearTimeout(openTimerRef.current);
-			openTimerRef.current = null;
-		}
-		if (closeTimerRef.current) {
-			clearTimeout(closeTimerRef.current);
-			closeTimerRef.current = null;
+	// Inicializa a partir do hash na URL
+	useEffect(() => {
+		const slug = getSlugFromHash();
+		if (slug) {
+			const idx = CREDENTIALS.findIndex((c) => c.slug === slug);
+			if (idx >= 0) {
+				setActiveIndex(idx);
+			}
 		}
 	}, []);
 
-	const openCard = useCallback((index: number) => {
-		clearTimers();
-		setOpenIndex(index);
-	}, [clearTimers]);
-
-	const closeCard = useCallback(() => {
-		clearTimers();
-		setOpenIndex(null);
-	}, [clearTimers]);
-
-	const handleMouseEnter = useCallback((index: number) => {
-		if (closeTimerRef.current) {
-			clearTimeout(closeTimerRef.current);
-			closeTimerRef.current = null;
-		}
-		openTimerRef.current = setTimeout(() => {
-			setOpenIndex(index);
-		}, 120);
+	// Responde a mudanças de hash (botão Voltar do navegador)
+	useEffect(() => {
+		const onHashChange = () => {
+			const slug = getSlugFromHash();
+			if (slug) {
+				const idx = CREDENTIALS.findIndex((c) => c.slug === slug);
+				if (idx >= 0) {
+					setActiveIndex(idx);
+				}
+			} else {
+				setActiveIndex(null);
+			}
+		};
+		window.addEventListener('hashchange', onHashChange);
+		return () => window.removeEventListener('hashchange', onHashChange);
 	}, []);
 
-	const handleMouseLeave = useCallback(() => {
-		if (openTimerRef.current) {
-			clearTimeout(openTimerRef.current);
-			openTimerRef.current = null;
+	// Foco no título do painel ao abrir
+	useEffect(() => {
+		if (activeIndex !== null && panelTitleRef.current) {
+			panelTitleRef.current.focus();
 		}
-		closeTimerRef.current = setTimeout(() => {
-			setOpenIndex(null);
-		}, 150);
+	}, [activeIndex]);
+
+	// Esc fecha o painel
+	useEffect(() => {
+		if (activeIndex === null) return;
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				e.preventDefault();
+				closePanel();
+			}
+		};
+		window.addEventListener('keydown', onKeyDown);
+		return () => window.removeEventListener('keydown', onKeyDown);
+	});
+
+	const openPanel = useCallback((index: number) => {
+		setActiveIndex(index);
+		window.location.hash = `credenciais-${CREDENTIALS[index].slug}`;
 	}, []);
 
-	const handleKeyDown = useCallback(
+	const closePanel = useCallback(() => {
+		const prevIndex = activeIndex;
+		setActiveIndex(null);
+		// Remove o hash sem pular a página
+		history.pushState('', document.title, window.location.pathname + window.location.search);
+		// Restaura foco no card que abriu
+		if (prevIndex !== null && cardRefs.current[prevIndex]) {
+			cardRefs.current[prevIndex]!.focus();
+			cardRefs.current[prevIndex]!.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+		}
+	}, [activeIndex]);
+
+	const navigateTo = useCallback(
+		(direction: 'prev' | 'next') => {
+			if (activeIndex === null) return;
+			const newIndex =
+				direction === 'prev'
+					? (activeIndex - 1 + CREDENTIALS.length) % CREDENTIALS.length
+					: (activeIndex + 1) % CREDENTIALS.length;
+			openPanel(newIndex);
+		},
+		[activeIndex, openPanel],
+	);
+
+	const handleCardKeyDown = useCallback(
 		(e: React.KeyboardEvent, index: number) => {
 			if (e.key === 'Enter' || e.key === ' ') {
 				e.preventDefault();
-				setOpenIndex((prev) => (prev === index ? null : index));
-			} else if (e.key === 'Escape') {
-				e.preventDefault();
-				setOpenIndex(null);
+				openPanel(index);
 			}
 		},
-		[],
+		[openPanel],
 	);
 
-	const handleFocus = useCallback((index: number) => {
-		setOpenIndex(index);
-	}, []);
+	// Renderiza o painel de detalhes
+	if (activeIndex !== null) {
+		const cred = CREDENTIALS[activeIndex];
+		const d = cred.details;
 
-	const handleBlur = useCallback(() => {
-		closeTimerRef.current = setTimeout(() => {
-			setOpenIndex(null);
-		}, 150);
-	}, []);
+		return (
+			<section className="credentials" aria-label="Credenciais" ref={sectionRef}>
+				<div className="w">
+					<div className="cred-panel" role="region" aria-live="polite">
+						<button className="cred-panel-back" onClick={closePanel} type="button">
+							← Voltar às credenciais
+						</button>
 
-	useEffect(() => {
-		return () => clearTimers();
-	}, [clearTimers]);
+						<div className="cred-panel-header">
+							<div className="cred-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">{cred.icon}</svg>
+							</div>
+							<h2 ref={panelTitleRef} tabIndex={-1}>
+								{cred.title}
+							</h2>
+						</div>
 
+						<div className="cred-panel-body">
+							{d.intro && <p className="cred-panel-intro">{d.intro}</p>}
+
+							{d.timeline && d.timeline.length > 0 && (
+								<div className="cred-timeline">
+									{d.timeline.map((item, i) => (
+										<div key={i} className="cred-timeline-item">
+											<span className="cred-timeline-marker" />
+											{item.year && <strong className="cred-timeline-year">{item.year}</strong>}
+											<p>{item.text}</p>
+										</div>
+									))}
+								</div>
+							)}
+
+							{d.items && d.items.length > 0 && (
+								<div className="cred-items-grid">
+									{d.items.map((item, i) => (
+										<div key={i} className="cred-item-card">
+											<h4>{item.title}</h4>
+											<p>{item.text}</p>
+										</div>
+									))}
+								</div>
+							)}
+
+							{d.documents && d.documents.length > 0 && (
+								<div className="cred-documents">
+									{d.documents.map((doc, i) => (
+										<figure key={i} className="cred-doc-figure">
+											{doc.src ? (
+												<img src={doc.src} alt={doc.alt} loading="lazy" />
+											) : (
+												<div className="cred-doc-placeholder" aria-hidden="true">
+													📄
+												</div>
+											)}
+											<figcaption>{doc.label}</figcaption>
+										</figure>
+									))}
+								</div>
+							)}
+
+							{d.note && <p className="cred-panel-note">{d.note}</p>}
+						</div>
+
+						<div className="cred-panel-footer">
+							<a className="btn" href={d.cta?.href || '/orcamento'}>
+								{d.cta?.label || 'Solicitar orçamento'}
+							</a>
+							<div className="cred-panel-nav">
+								<button type="button" onClick={() => navigateTo('prev')}>
+									← Anterior
+								</button>
+								<button type="button" onClick={() => navigateTo('next')}>
+									Próximo →
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		);
+	}
+
+	// Renderiza a grade de cards
 	return (
-		<section className="credentials" aria-label="Credenciais">
+		<section className="credentials" aria-label="Credenciais" ref={sectionRef} id="credenciais">
 			<div className="w">
 				<div className="credentials-grid">
-					{CREDENTIALS.map((item, index) => {
-						const isOpen = openIndex === index;
-						const detailsId = `cred-details-${index}`;
-
-						return (
-							<div
-								key={item.title}
-								ref={(el) => { cardRefs.current[index] = el; }}
-								className={`cred-card cred-card--expandable${isOpen ? ' cred-card--open' : ''}`}
-								tabIndex={0}
-								role="button"
-								aria-expanded={isOpen}
-								aria-controls={detailsId}
-								onMouseEnter={() => handleMouseEnter(index)}
-								onMouseLeave={handleMouseLeave}
-								onFocus={() => handleFocus(index)}
-								onBlur={handleBlur}
-								onKeyDown={(e) => handleKeyDown(e, index)}
-							>
-								<div className="cred-icon" aria-hidden="true">
-									<svg viewBox="0 0 24 24">{item.icon}</svg>
-								</div>
-								<h3>{item.title}</h3>
-								<p>{item.description}</p>
-
-								<div className="cred-toggle" aria-hidden="true">
-									<span>{isOpen ? 'Mostrar menos' : 'Saiba mais'}</span>
-									<svg className={`cred-chevron${isOpen ? ' cred-chevron--open' : ''}`} viewBox="0 0 24 24" width="16" height="16">
-										<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-									</svg>
-								</div>
-
-								<div className="cred-overlay" id={detailsId} role="region" aria-hidden={!isOpen}>
-									<div className="cred-overlay-inner">
-										<hr className="cred-divider" />
-										{item.details.map((paragraph, pIdx) => (
-											<p key={pIdx}>{paragraph}</p>
-										))}
-										<a className="btn cred-cta" href="/orcamento">
-											Solicitar orçamento
-										</a>
-									</div>
-								</div>
+					{CREDENTIALS.map((item, index) => (
+						<button
+							key={item.slug}
+							ref={(el) => {
+								cardRefs.current[index] = el;
+							}}
+							className="cred-card cred-card--clickable"
+							type="button"
+							onClick={() => openPanel(index)}
+							onKeyDown={(e) => handleCardKeyDown(e, index)}
+							style={{ scrollMarginTop: 'calc(var(--header-h) + 1rem)' }}
+						>
+							<div className="cred-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">{item.icon}</svg>
 							</div>
-						);
-					})}
+							<h3>{item.title}</h3>
+							<p>{item.description}</p>
+							<span className="cred-card-link" aria-hidden="true">
+								Saiba mais →
+							</span>
+						</button>
+					))}
 				</div>
 			</div>
 		</section>
