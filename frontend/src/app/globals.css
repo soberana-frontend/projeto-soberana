@@ -1846,3 +1846,73 @@ footer {
   color: var(--mut);
   margin-top: 0.5rem;
 }
+
+/* --- Página Institucional --- */
+.inst-hero {
+  padding: calc(var(--header-h) + 2rem) 0 2rem;
+  background: var(--bg);
+  text-align: center;
+}
+
+.inst-hero h1 {
+  color: #fff;
+  margin-top: 0.5rem;
+}
+
+.inst-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .inst-split {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.inst-text h2 {
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.inst-text p {
+  color: var(--body);
+  line-height: 1.8;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.05rem);
+}
+
+.inst-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, var(--surf) 0%, var(--brand) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* TODO: Substituir por foto real da equipe/sede via <img> ou next/image */
+.inst-img::after {
+  content: 'Foto da equipe';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mut);
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+.inst-summary {
+  text-align: center;
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+.inst-summary p {
+  color: var(--body);
+  font-size: clamp(1.05rem, 1rem + 0.25vw, 1.15rem);
+  line-height: 1.8;
+}
