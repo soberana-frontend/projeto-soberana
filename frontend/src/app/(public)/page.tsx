@@ -1,6 +1,3 @@
-import Header from '@/components/ui/Header';
-import Footer from '@/components/ui/Footer';
-import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import CtaBanner from '@/components/ui/CtaBanner';
 import { Hero, Stats } from '@/features/hero';
 import { CredentialCards } from '@/features/credentials';
@@ -16,7 +13,6 @@ export default async function Home() {
 
 	return (
 		<>
-			<Header />
 			<main>
 				<Hero />
 				<Stats />
@@ -29,8 +25,6 @@ export default async function Home() {
 				<SocialAction />
 				<CtaBanner />
 			</main>
-			<Footer />
-			<WhatsAppButton />
 		</>
 	);
 }
