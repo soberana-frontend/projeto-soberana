@@ -137,14 +137,14 @@ main .eyebrow {
 
 /* --- Header --- */
 .hd {
-  background: rgba(27, 35, 65, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(26, 35, 69, 0.65);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
   color: #fff;
   position: sticky;
   top: 0;
   z-index: 50;
-  box-shadow: none;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -188,6 +188,11 @@ main .eyebrow {
   height: clamp(2.5rem, calc(var(--header-h) - 1.5rem), 5rem);
   width: auto;
   flex-shrink: 0;
+}
+
+/* Tema claro: logo maior para compensar contraste visual */
+:root[data-theme="light"] .logo-img {
+  height: clamp(3rem, calc(var(--header-h) - 0.75rem), 6.5rem);
 }
 
 footer .logo-img {
@@ -1654,6 +1659,16 @@ footer {
     border-radius: 0 0 0.75rem 0.75rem;
     padding: 0.5rem 0;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Dropdown abre ao passar o mouse no desktop */
+  nav details:hover > summary + .sub,
+  nav details[open] > .sub {
+    display: block;
+  }
+
+  nav summary {
+    cursor: pointer;
   }
 
   nav .btn {

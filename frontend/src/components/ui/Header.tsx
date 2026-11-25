@@ -58,6 +58,21 @@ export default function Header() {
 		}
 	};
 
+	// Dropdown "Institucional" abre ao passar o mouse (desktop)
+	const handleDetailsMouseEnter = () => {
+		if (window.matchMedia('(min-width: 768px)').matches) {
+			const details = document.querySelector('nav details');
+			details?.setAttribute('open', '');
+		}
+	};
+
+	const handleDetailsMouseLeave = () => {
+		if (window.matchMedia('(min-width: 768px)').matches) {
+			const details = document.querySelector('nav details');
+			details?.removeAttribute('open');
+		}
+	};
+
 	return (
 		<header className={`hd${scrolled ? ' scrolled' : ''}`}>
 			<a className="logo" href="/" aria-label="Soberana – início">
@@ -72,7 +87,7 @@ export default function Header() {
 						</li>
 					))}
 					<li>
-						<details>
+						<details onMouseEnter={handleDetailsMouseEnter} onMouseLeave={handleDetailsMouseLeave}>
 							<summary>Institucional</summary>
 							<div className="sub">
 								{INSTITUTIONAL_LINKS.map((link) => (
