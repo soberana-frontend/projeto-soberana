@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import PageHero from '@/components/ui/PageHero';
 
 export const metadata: Metadata = {
 	title: 'Parceiros – Soberana Segurança e Vigilância',
@@ -37,8 +38,7 @@ const PARTNERS: PartnerItem[] = [
 export default function ParceirosPage() {
 	return (
 		<main style={{ padding: '4rem 1rem', maxWidth: '900px', margin: '0 auto' }}>
-			<p className="eyebrow" style={{ color: 'var(--sky)' }}>Rede de apoio</p>
-			<h1>Nossos parceiros</h1>
+			<PageHero eyebrow="Rede de apoio" title="Nossos parceiros" />
 			<p style={{ color: 'var(--mut)', fontSize: '1.1rem', marginTop: '1rem', lineHeight: 1.7 }}>
 				A Soberana mantém parcerias estratégicas com as principais entidades do setor de segurança
 				privada e serviços terceirizados, garantindo conformidade, atualização constante e

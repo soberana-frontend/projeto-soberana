@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import CtaBanner from '@/components/ui/CtaBanner';
+import PageHero from '@/components/ui/PageHero';
 
 export const metadata: Metadata = {
 	title: 'Institucional – Soberana Segurança e Vigilância',
@@ -25,13 +26,7 @@ export default function InstitucionalPage() {
 	return (
 		<>
 			<main>
-				{/* Hero interno */}
-				<section className="inst-hero">
-					<div className="w">
-						<p className="eyebrow">Institucional</p>
-						<h1>Nossa história</h1>
-					</div>
-				</section>
+				<PageHero eyebrow="Institucional" title="Nossa história" />
 
 				{/* Fundação e trajetória — texto + imagem lado a lado */}
 				<section>

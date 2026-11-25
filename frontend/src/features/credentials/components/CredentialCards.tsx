@@ -43,7 +43,7 @@ const CREDENTIALS: CredentialItem[] = [
 		details: {
 			intro:
 				'A segurança privada no Brasil é regulamentada e fiscalizada pela Polícia Federal, que autoriza e acompanha as empresas do setor. A Soberana atua dentro dessas exigências.',
-			timeline: [{ year: '', text: '[TEXTO DE EXEMPLO - SUBSTITUIR]' }],
+			timeline: [{ year: '', text: '__PLACEHOLDER__' }],
 		},
 		icon: (
 			<path d="M12 2l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V5l7-3zm-1 11l-3-3 1.4-1.4L11 14.2l5.6-5.6L18 10l-7 7z" />
@@ -72,7 +72,7 @@ const CREDENTIALS: CredentialItem[] = [
 			intro:
 				'Nossos processos e nossa equipe contam com certificações reconhecidas. Fale com a nossa equipe para conhecer cada uma delas.',
 			documents: [
-				{ label: '[TEXTO DE EXEMPLO - SUBSTITUIR]', src: '', alt: 'Placeholder de documento' },
+				{ label: '__PLACEHOLDER__', src: '', alt: 'Placeholder de documento' },
 			],
 		},
 		icon: (
@@ -285,7 +285,11 @@ export default function CredentialCards() {
 										<div key={i} className="cred-timeline-item">
 											<span className="cred-timeline-marker" />
 											{item.year && <strong className="cred-timeline-year">{item.year}</strong>}
-											<p>{item.text}</p>
+											{item.text === '__PLACEHOLDER__' ? (
+												<span className="cred-placeholder-warning">TEXTO DE EXEMPLO — SUBSTITUIR POR CONTEÚDO REAL</span>
+											) : (
+												<p>{item.text}</p>
+											)}
 										</div>
 									))}
 								</div>
@@ -313,7 +317,13 @@ export default function CredentialCards() {
 													📄
 												</div>
 											)}
-											<figcaption>{doc.label}</figcaption>
+											<figcaption>
+												{doc.label === '__PLACEHOLDER__' ? (
+													<span className="cred-placeholder-warning">TEXTO DE EXEMPLO — SUBSTITUIR POR CONTEÚDO REAL</span>
+												) : (
+													doc.label
+												)}
+											</figcaption>
 										</figure>
 									))}
 								</div>

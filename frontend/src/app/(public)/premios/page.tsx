@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import PageHero from '@/components/ui/PageHero';
 
 export const metadata: Metadata = {
 	title: 'Prêmios e Certificações – Soberana Segurança e Vigilância',
@@ -39,8 +40,7 @@ const CERTIFICATIONS: CertificationItem[] = [
 export default function PremiosPage() {
 	return (
 		<main style={{ padding: '4rem 1rem', maxWidth: '900px', margin: '0 auto' }}>
-			<p className="eyebrow" style={{ color: 'var(--sky)' }}>Reconhecimento</p>
-			<h1>Prêmios e certificações</h1>
+			<PageHero eyebrow="Reconhecimento" title="Prêmios e certificações" />
 			<p style={{ color: 'var(--mut)', fontSize: '1.1rem', marginTop: '1rem', lineHeight: 1.7 }}>
 				Ao longo de mais de 30 anos de atuação, a Soberana conquistou prêmios e certificações que atestam
 				seu compromisso com qualidade, conformidade e excelência operacional.
