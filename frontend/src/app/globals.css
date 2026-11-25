@@ -185,9 +185,13 @@ main .eyebrow {
 }
 
 .logo-img {
-  height: calc(var(--header-h) - 1.5rem);
+  height: clamp(2.5rem, calc(var(--header-h) - 1.5rem), 5rem);
   width: auto;
   flex-shrink: 0;
+}
+
+footer .logo-img {
+  height: clamp(3rem, 5vw, 4.5rem);
 }
 
 .hd-actions {
@@ -1637,7 +1641,7 @@ footer {
   nav summary {
     padding: 0.6rem 0.75rem;
     border: 0;
-    font-size: 0.95rem;
+    font-size: clamp(0.875rem, 0.8rem + 0.25vw, 1.0625rem);
   }
 
   nav .sub {
