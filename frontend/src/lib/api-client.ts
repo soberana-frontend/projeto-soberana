@@ -3,12 +3,51 @@ import type { ServiceItem, SegmentItem, NewsItem, CreateBudgetDto, BudgetRequest
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333/api';
 
 const FALLBACK_SERVICES: ServiceItem[] = [
-	{ id: 1, title: 'Vigilância patrimonial', description: 'Empresas, indústrias e obras', icon: 'shield' },
-	{ id: 2, title: 'Portaria e acesso', description: 'Recepção e controle de entrada', icon: 'building' },
-	{ id: 3, title: 'Monitoramento', description: 'Câmeras e acompanhamento remoto', icon: 'camera' },
-	{ id: 4, title: 'Escolta', description: 'Deslocamentos e cargas seguras', icon: 'route' },
-	{ id: 5, title: 'Eventos', description: 'Controle de público e segurança', icon: 'users' },
-	{ id: 6, title: 'Segurança pessoal', description: 'Proteção para pessoas e famílias', icon: 'user-shield' },
+	{
+		id: 1,
+		title: 'Vigilância patrimonial',
+		description: 'Empresas, indústrias e obras',
+		icon: 'shield-building',
+		badge: 'Armada e desarmada',
+		bullets: ['Rondas periódicas 24h', 'Equipe identificada e treinada', 'Relatórios de supervisão'],
+	},
+	{
+		id: 2,
+		title: 'Portaria e acesso',
+		description: 'Recepção e controle de entrada',
+		icon: 'badge-check',
+		bullets: ['Controle de visitantes e veículos', 'Registro digital de acesso', 'Triagem e identificação'],
+	},
+	{
+		id: 3,
+		title: 'Monitoramento',
+		description: 'Câmeras e acompanhamento remoto',
+		icon: 'monitor-cctv',
+		bullets: ['CFTV e câmeras IP', 'Central de monitoramento 24h', 'Equipamentos modernos'],
+	},
+	{
+		id: 4,
+		title: 'Escolta',
+		description: 'Deslocamentos e cargas seguras',
+		icon: 'truck-shield',
+		badge: 'Armada',
+		bullets: ['Rotas planejadas e monitoradas', 'Frota própria renovada', 'Comunicação em tempo real'],
+	},
+	{
+		id: 5,
+		title: 'Eventos',
+		description: 'Controle de público e segurança',
+		icon: 'crowd-shield',
+		bullets: ['Dimensionamento por público', 'Do planejamento ao encerramento', 'Conformidade com legislação'],
+	},
+	{
+		id: 6,
+		title: 'Segurança pessoal',
+		description: 'Proteção para pessoas e famílias',
+		icon: 'user-shield',
+		badge: 'Privada',
+		bullets: ['Profissionais especializados', 'Discrição e prontidão', 'Atendimento personalizado'],
+	},
 ];
 
 const FALLBACK_SEGMENTS: SegmentItem[] = [
