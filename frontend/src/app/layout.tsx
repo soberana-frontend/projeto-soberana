@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 
 const roboto = Roboto({
@@ -31,7 +32,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<head>
 				<script dangerouslySetInnerHTML={{ __html: themeScript }} />
 			</head>
-			<body>{children}</body>
+			<body>
+				{children}
+				{process.env.NEXT_PUBLIC_GA_ID && (
+					<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+				)}
+			</body>
 		</html>
 	);
 }

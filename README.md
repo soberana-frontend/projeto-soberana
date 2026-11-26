@@ -155,6 +155,14 @@ git push origin main
 
 > ⚠️ **Nunca faça commit de arquivos `.env`** — eles contêm credenciais e já estão no `.gitignore`. Use `.env.example` como template.
 
+### Variáveis de ambiente na Vercel
+
+| Variável | Descrição | Exemplo |
+|----------|-----------|---------|
+| `NEXT_PUBLIC_GA_ID` | ID de medição do Google Analytics 4 | `G-XXXXXXXXXX` |
+
+Adicione essa variável em **Settings > Environment Variables** no painel da Vercel. O componente `<GoogleAnalytics>` só é renderizado quando a variável está definida, evitando erros em ambientes sem configuração.
+
 ## Histórico de commits com referências removidas
 
 Os seguintes commits no histórico do git mencionam a instituição de origem da paleta. O histórico não foi reescrito, mas as referências foram removidas do código e documentação atuais:
