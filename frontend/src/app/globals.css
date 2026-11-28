@@ -1926,9 +1926,12 @@ footer {
 
 /* --- Página Institucional --- */
 .inst-hero {
-  padding: calc(var(--header-h) + 2rem) 0 2rem;
+  padding: calc(var(--header-h) + 1rem) 0 1.5rem;
   background: var(--bg);
   text-align: center;
+  display: flex;
+  align-items: center;
+  min-height: auto;
 }
 
 .inst-hero h1 {
@@ -1971,15 +1974,18 @@ footer {
 
 /* TODO: Substituir por foto real da equipe/sede via <img> ou next/image */
 .inst-img::after {
-  content: 'Foto da equipe';
+  content: '📷 Foto da equipe';
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--mut);
-  font-size: 0.9rem;
-  opacity: 0.6;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  opacity: 0.85;
+  pointer-events: none;
 }
 
 .inst-summary {
