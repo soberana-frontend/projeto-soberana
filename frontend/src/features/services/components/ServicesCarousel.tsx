@@ -76,6 +76,7 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
 		let cur = 0;
 		let drag = false;
 		let lastX = 0;
+		let lastY = 0;
 		let vel = 0;
 		let autoTimer: ReturnType<typeof setInterval> | null = null;
 		let autoAngle = 0;
