@@ -1927,7 +1927,7 @@ footer {
 /* --- Página Institucional --- */
 .inst-hero {
   padding: calc(var(--header-h) + 1.5rem) 0 2rem;
-  background: var(--bg);
+  background: #2a4a8a;
   text-align: center;
 }
 
