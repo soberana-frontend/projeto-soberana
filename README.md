@@ -117,6 +117,52 @@ A alternância de tema funciona via atributo `data-theme` no elemento `<html>`:
 - **Toggle**: botão no Header ([`frontend/src/components/ui/Header.tsx`](frontend/src/components/ui/Header.tsx)) alterna entre `'light'` e `'dark'`, atualizando o atributo `data-theme` e salvando no localStorage.
 - **CSS**: as variáveis são redefinidas em `:root[data-theme="dark"]` no globals.css. Transições suaves respeitam `prefers-reduced-motion`.
 
+## Segurança
+
+### Autenticação do painel admin (cookies HTTP-only)
+
+A autenticação do `/admin` utiliza cookies **HTTP-only** com criptografia TLS de ponta a ponta em produção:
+
+- **Cookie seguro**: o token JWT é definido pelo backend via `Set-Cookie` com flags `HttpOnly`, `Secure` (produção), `SameSite: lax`, `path: /` e `maxAge: 24h`. O JavaScript do navegador **não consegue ler** o token, protegendo contra XSS.
+- **Middleware server-side**: [`frontend/src/middleware.ts`](frontend/src/middleware.ts) protege todas as rotas `/admin/*` no Edge Runtime, redirecionando para `/admin/login` antes de renderizar qualquer HTML caso o cookie esteja ausente.
+- **Estratégia JWT híbrida**: [`backend/src/auth/strategies/jwt.strategy.ts`](backend/src/auth/strategies/jwt.strategy.ts) extrai o token prioritariamente de `req.cookies.token`, com fallback para header `Authorization: Bearer` (compatibilidade com Swagger/integrações externas).
+- **Logout dedicado**: rota `POST /auth/logout` limpa o cookie via `res.clearCookie()`.
+- **CORS configurado**: `credentials: true` com origin explícita (sem wildcard `*`).
+- **Sem credenciais no código**: senha do admin definida exclusivamente via variável de ambiente `ADMIN_PASSWORD`; chave JWT via `JWT_SECRET` (ambas obrigatórias, sem fallback hardcoded).
+
+> ⚠️ **Para produção com domínios distintos** (frontend Vercel ≠ backend): altere `sameSite: 'lax'` para `sameSite: 'none'` em [`backend/src/auth/auth.controller.ts`](backend/src/auth/auth.controller.ts) e garanta que `secure: true` esteja sempre ativo.
+
+### Variáveis de ambiente obrigatórias (backend)
+
+| Variável | Descrição | Obrigatória |
+|----------|-----------|-------------|
+| `JWT_SECRET` | Chave secreta para assinar tokens JWT | Sim |
+| `ADMIN_EMAIL` | E-mail do usuário admin criado no seed | Não (padrão: `admin@soberana.com`) |
+| `ADMIN_PASSWORD` | Senha forte do usuário admin | **Sim** (seed falha se não definida) |
+| `DATABASE_URL` | Conexão PostgreSQL | Sim |
+| `FRONTEND_URL` | Origin permitida no CORS | Sim |
+
+## Responsividade e UX
+
+### Auditoria de consistência (Header/Footer)
+
+Todas as 6 páginas públicas (`/`, `/institucional`, `/premios`, `/parceiros`, `/trabalhe-conosco`, `/orcamento`) compartilham o **mesmo** Header e Footer via [`frontend/src/app/(public)/layout.tsx`](frontend/src/app/(public)/layout.tsx). Nenhum CSS condicional por página ou tema altera altura/espaçamento. O grupo `/admin` tem layout próprio independente.
+
+| Breakpoint | Header (`--header-h`) | Footer padding-top |
+|------------|----------------------|--------------------|
+| Mobile (<640px) | 72px | 3rem (48px) |
+| Tablet (≥640px) | 96px | 3rem (48px) |
+| Desktop (≥1024px) | 120px | 4.25rem (68px) |
+
+### Correções de responsividade aplicadas
+
+| Componente | Problema | Correção |
+|------------|----------|----------|
+| Upload de currículo ([`JobForm.tsx`](frontend/src/app/(public)/trabalhe-conosco/JobForm.tsx)) | Input file nativo estourava layout em 320-375px; feedback de arquivo longo sem word-break | Label customizado com `opacity:0; position:absolute; inset:0` (iOS Safari compatível); `overflow-wrap: break-word` no feedback e erros |
+| Carrossel de serviços ([`ServicesCarousel.tsx`](frontend/src/features/services/components/ServicesCarousel.tsx)) | Drag horizontal capturava scroll vertical da página | `touchmove` com `{ passive: false }` + `preventDefault()` condicional quando `|dx| > |dy|` |
+| Hero institucional ([`globals.css`](frontend/src/app/globals.css)) | Vão excessivo (~400px) entre header e título; placeholder de foto invisível | Padding ajustado para `calc(var(--header-h) + 1.5rem)`; span `.inst-img-placeholder` com texto visível sobre gradiente |
+| Página /institucional | Cor de fundo do hero igual ao resto da página | Background alterado para `#2a4a8a` (azul mais claro) diferenciando a seção |
+
 ## Bugs conhecidos e corrigidos
 
 | Bug | Causa | Correção |
@@ -126,6 +172,7 @@ A alternância de tema funciona via atributo `data-theme` no elemento `<html>`:
 | Tamanho abrupto do nav menu entre breakpoints | Font-size fixo por breakpoint causava saltos visuais | Substituído por `clamp()` fluido |
 | Logo inconsistente entre header e footer | Mesma classe `.logo-img` sem contexto específico | Adicionada regra `footer .logo-img` com sizing próprio |
 | Dropdown "Institucional" exigia clique no desktop | `<details>` nativo só abre com click/tap | Adicionados handlers `onMouseEnter`/`onMouseLeave` no Header.tsx para abrir no hover (≥768px) |
+| Build falhava na Vercel (TS2552) | Variável `lastY` usada mas nunca declarada no ServicesCarousel | Adicionada declaração `let lastY = 0` |
 
 ## Pendências (placeholders a preencher)
 
