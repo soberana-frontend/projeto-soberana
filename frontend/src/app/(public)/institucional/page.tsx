@@ -42,7 +42,9 @@ export default function InstitucionalPage() {
 							</p>
 						</div>
 						{/* TODO: Substituir por foto real da equipe/sede da Soberana */}
-						<div className="inst-img" role="img" aria-label="Equipe Soberana Segurança e Vigilância" />
+						<div className="inst-img" role="img" aria-label="Equipe Soberana Segurança e Vigilância">
+							<span className="inst-img-placeholder">📷 Foto da equipe</span>
+						</div>
 					</div>
 				</section>
 
