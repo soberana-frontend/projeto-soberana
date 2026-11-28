@@ -193,20 +193,51 @@ export default function JobForm() {
 					<label htmlFor="resume" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--tx)', fontWeight: '500' }}>
 						Currículo (PDF ou DOC/DOCX, máx. 5MB)
 					</label>
-					<input
-						type="file"
-						id="resume"
-						name="resume"
-						accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-						onChange={handleFileChange}
-						style={inputStyle}
-					/>
+					<label
+						htmlFor="resume"
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							gap: '0.75rem',
+							width: '100%',
+							padding: '0.75rem',
+							borderRadius: '6px',
+							border: '1px dashed var(--line)',
+							background: 'var(--bg)',
+							color: 'var(--tx)',
+							fontSize: '0.95rem',
+							cursor: 'pointer',
+							position: 'relative',
+							minHeight: '48px',
+							transition: 'border-color 0.2s ease',
+						}}
+					>
+						<input
+							type="file"
+							id="resume"
+							name="resume"
+							accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+							onChange={handleFileChange}
+							style={{
+								position: 'absolute',
+								inset: 0,
+								width: '100%',
+								height: '100%',
+								opacity: 0,
+								cursor: 'pointer',
+							}}
+						/>
+						<span style={{ flexShrink: 0, fontSize: '1.25rem' }} aria-hidden="true">📄</span>
+						<span style={{ overflowWrap: 'break-word', wordBreak: 'break-word' }}>
+							{resumeFile ? resumeFile.name : 'Toque para selecionar o currículo'}
+						</span>
+					</label>
 					{resumeError && (
-						<p style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '0.35rem' }}>{resumeError}</p>
+						<p style={{ color: '#ef4444', fontSize: '0.85rem', marginTop: '0.35rem', overflowWrap: 'break-word' }}>{resumeError}</p>
 					)}
 					{resumeFile && !resumeError && (
-						<p style={{ color: 'var(--gold)', fontSize: '0.85rem', marginTop: '0.35rem' }}>
-							✓ {resumeFile.name} ({(resumeFile.size / 1024).toFixed(0)} KB)
+						<p style={{ color: 'var(--gold)', fontSize: '0.85rem', marginTop: '0.35rem', overflowWrap: 'break-word', wordBreak: 'break-word' }}>
+							✓ {(resumeFile.size / 1024).toFixed(0)} KB
 						</p>
 					)}
 					<p style={{ color: 'var(--mut)', fontSize: '0.8rem', marginTop: '0.35rem', fontStyle: 'italic' }}>

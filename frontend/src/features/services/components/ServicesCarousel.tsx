@@ -124,6 +124,7 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
 		function onDown(e: MouseEvent | TouchEvent) {
 			drag = true;
 			lastX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+			lastY = 'touches' in e ? e.touches[0].clientY : (e as MouseEvent).clientY;
 			vel = 0;
 			ring!.classList.add('dragging');
 			stopAuto();
@@ -132,10 +133,19 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
 		function onMove(e: MouseEvent | TouchEvent) {
 			if (!drag) return;
 			const x = 'touches' in e ? e.touches[0].clientX : e.clientX;
+			const y = 'touches' in e ? e.touches[0].clientY : (e as MouseEvent).clientY;
 			const dx = x - lastX;
+			const dy = y - lastY;
+
+			// Se o movimento é mais horizontal que vertical, previne scroll da página
+			if ('touches' in e && Math.abs(dx) > Math.abs(dy)) {
+				e.preventDefault();
+			}
+
 			vel = dx;
 			setRot(-cur * angle + dx * 0.4, false);
 			lastX = x;
+			lastY = y;
 		}
 
 		function onUp() {
@@ -151,7 +161,7 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
 		ring.addEventListener('mousedown', onDown);
 		ring.addEventListener('touchstart', onDown, { passive: true });
 		window.addEventListener('mousemove', onMove);
-		window.addEventListener('touchmove', onMove, { passive: true });
+		window.addEventListener('touchmove', onMove, { passive: false });
 		window.addEventListener('mouseup', onUp);
 		window.addEventListener('touchend', onUp);
 
