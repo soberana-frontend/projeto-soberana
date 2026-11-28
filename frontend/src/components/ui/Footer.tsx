@@ -14,9 +14,9 @@ interface SocialLink {
 }
 
 const QUICK_LINKS: FooterLink[] = [
-	{ href: '#servicos', label: 'Serviços' },
-	{ href: '#segmentos', label: 'Para quem atuamos' },
-	{ href: '#noticias', label: 'Notícias' },
+	{ href: '/#servicos', label: 'Serviços' },
+	{ href: '/#segmentos', label: 'Para quem atuamos' },
+	{ href: '/#noticias', label: 'Notícias' },
 	{ href: '/orcamento', label: 'Solicitar orçamento' },
 ];
 
@@ -25,7 +25,7 @@ const INSTITUTIONAL_LINKS: FooterLink[] = [
 	{ href: '#', label: 'Ouvidoria' },
 	{ href: '#', label: 'Canal de conduta ética' },
 	{ href: '#', label: 'Proteção de dados (LGPD)' },
-	{ href: '#', label: 'Trabalhe conosco', external: true },
+	{ href: '/trabalhe-conosco', label: 'Trabalhe conosco' },
 ];
 
 const SOCIAL_LINKS: SocialLink[] = [

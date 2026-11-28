@@ -9,9 +9,9 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-	{ href: '#servicos', label: 'Serviços' },
-	{ href: '#segmentos', label: 'Para quem atuamos' },
-	{ href: '#noticias', label: 'Notícias' },
+	{ href: '/#servicos', label: 'Serviços' },
+	{ href: '/#segmentos', label: 'Para quem atuamos' },
+	{ href: '/#noticias', label: 'Notícias' },
 ];
 
 const INSTITUTIONAL_LINKS: NavItem[] = [
