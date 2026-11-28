@@ -18,20 +18,17 @@ export default function AdminLoginPage() {
  setError('');
 
  try {
- const res = await fetch(`${API_BASE}/auth/login`, {
- method: 'POST',
- headers: { 'Content-Type': 'application/json' },
- body: JSON.stringify({ email, password }),
- });
+		const res = await fetch(`${API_BASE}/auth/login`, {
+			method: 'POST',
+			credentials: 'include',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ email, password }),
+		});
 
- if (!res.ok) throw new Error('Credenciais inválidas');
+		if (!res.ok) throw new Error('Credenciais inválidas');
 
- const data = await res.json();
- // Salva token em cookie seguro (HTTP-only seria ideal, mas requer endpoint dedicado)
- document.cookie = `token=${data.access_token}; path=/; max-age=86400; SameSite=Strict`;
-
- // Redireciona para o painel
- router.push('/admin');
+		// O backend define o cookie HttpOnly automaticamente na resposta
+		router.push('/admin');
  } catch (err) {
  setError('E-mail ou senha incorretos.');
  } finally {
@@ -84,7 +81,7 @@ export default function AdminLoginPage() {
  </button>
 
  <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.8rem', color: 'var(--mut)' }}>
- Credenciais padrão: <code>admin@soberana.com</code> / <code>admin123</code>
+		 Acesso restrito a administradores autorizados.
  </p>
  </form>
  </div>

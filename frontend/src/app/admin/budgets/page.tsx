@@ -20,13 +20,10 @@ export default function AdminBudgetsPage() {
 	const [error, setError] = useState('');
 
 	const fetchBudgets = async () => {
- const token = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
- if (!token) return;
-
- try {
- const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333/api'}/budget`, {
- headers: { 'Authorization': `Bearer ${token}` },
- });
+		try {
+			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333/api'}/budget`, {
+				credentials: 'include',
+			});
  if (res.ok) {
  const data = await res.json();
  setBudgets(data);
@@ -41,18 +38,15 @@ export default function AdminBudgetsPage() {
 	};
 
 	const updateStatus = async (id: number, newStatus: string) => {
- const token = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
- if (!token) return;
-
- try {
- const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333/api'}/budget/${id}`, {
- method: 'PATCH',
- headers: {
- 'Content-Type': 'application/json',
- 'Authorization': `Bearer ${token}`
- },
- body: JSON.stringify({ status: newStatus }),
- });
+		try {
+			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333/api'}/budget/${id}`, {
+				method: 'PATCH',
+				credentials: 'include',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ status: newStatus }),
+			});
  if (res.ok) {
  setBudgets(prev => prev.map(b => b.id === id ? { ...b, status: newStatus } : b));
  }
